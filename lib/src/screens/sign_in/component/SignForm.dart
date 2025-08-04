@@ -95,7 +95,7 @@ class _SignFormState extends State<SignForm> {
                   }
                 },
                 style: ButtonStyle( backgroundColor:WidgetStateProperty.all(AppColor.orange)),
-                child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 18))
+                child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'assets/fonts/Metropolis-SemiBold.ttf'))
             ),
           ),
           const SizedBox(height: 20),

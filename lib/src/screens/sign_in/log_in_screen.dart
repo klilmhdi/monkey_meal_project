@@ -30,7 +30,9 @@ class LoginScreen extends StatelessWidget {
                   "Login",
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.normal,
+                    fontFamily: 'assets/fonts/Metropolis-ExtraBold.ttf',
                     fontSize: 30,
+                    color: Color(0xFF4A4B4D),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -38,6 +40,7 @@ class LoginScreen extends StatelessWidget {
                   'Add your details to login',
                   style: TextStyle(
                     fontSize: 16,
+                    fontFamily: 'assets/fonts/Metropolis-Medium.ttf',
                     color: Colors.grey,
                   ),
                 ),
@@ -49,7 +52,8 @@ class LoginScreen extends StatelessWidget {
                 const Spacer(
                   flex: 2,
                 ),
-                const Text("or Login With", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+                const Text("or Login With", style: TextStyle(color: Colors.grey,
+                    fontWeight: FontWeight.bold, fontFamily: 'assets/fonts/Metropolis-Medium.ttf')),
                 const Spacer(),
 
                 SizedBox(
@@ -79,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const Text(
                           "Login with Facebook",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white, fontFamily: 'assets/fonts/Metropolis-Medium.ttf'),
                         )
                       ],
                     ),
@@ -114,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const Text(
                           "Login with Google",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white, fontFamily: 'assets/fonts/Metropolis-Medium.ttf'),
                         )
                       ],
                     ),
