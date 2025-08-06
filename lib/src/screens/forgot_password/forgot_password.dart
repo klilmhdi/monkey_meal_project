@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/src/screens/forgot_password/send_otp_screen.dart';
-import '../../constantes/const.dart';
-import '../../helper/colors.dart';
+
+import '../../../core/consts/colors/colors.dart';
+import '../../../core/consts/strings/strings.dart';
 import '../../helper/helper.dart';
 
 class ForgetPwScreen extends StatelessWidget {
-  static String routeName="/forget_pwd";
+  static String routeName = "/forget_pwd";
 
   const ForgetPwScreen({super.key});
 
@@ -18,10 +19,7 @@ class ForgetPwScreen extends StatelessWidget {
         height: Helper.getScreenWidth(context),
         child: SafeArea(
           child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 40,
-              vertical: 30,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
             child: Column(
               children: [
                 Text(
@@ -60,22 +58,20 @@ class ForgetPwScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       borderSide: BorderSide.none,
                     ),
-
                   ),
                 ),
-                Spacer(flex: 3,),
+                Spacer(flex: 3),
                 SizedBox(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(SendOTPScreen.routeName);
+                      Navigator.of(context).pushReplacementNamed(SendOTPScreen.routeName);
                     },
-                    style: ButtonStyle( backgroundColor:WidgetStateProperty.all(AppColor.orange)),
-                    child: Text("Send",style: TextStyle(color: Colors.white, fontSize: 18)),
+                    style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColor.orange)),
+                    child: Text("Send", style: TextStyle(color: Colors.white, fontSize: 18)),
                   ),
-                )
+                ),
               ],
             ),
           ),

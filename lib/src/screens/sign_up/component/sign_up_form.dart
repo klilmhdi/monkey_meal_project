@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../constantes/const.dart';
-import '../../../helper/colors.dart';
+import '../../../../core/consts/colors/colors.dart';
+import '../../../../core/consts/strings/strings.dart';
 
-class SignUpForm extends StatefulWidget{
+class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
 
   @override
   _SignUpFormState createState() => _SignUpFormState();
-
 }
-class _SignUpFormState extends State<SignUpForm>{
+
+class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -26,7 +26,6 @@ class _SignUpFormState extends State<SignUpForm>{
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
           TextFormField(
             controller: _nameController,
             keyboardType: TextInputType.text,
@@ -48,8 +47,7 @@ class _SignUpFormState extends State<SignUpForm>{
                 borderSide: BorderSide.none,
               ),
             ),
-            onChanged: (value) {
-            },
+            onChanged: (value) {},
           ),
 
           const SizedBox(height: 20),
@@ -76,10 +74,8 @@ class _SignUpFormState extends State<SignUpForm>{
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 borderSide: BorderSide.none,
               ),
-
             ),
-            onChanged: (value) {
-            },
+            onChanged: (value) {},
           ),
 
           const SizedBox(height: 20),
@@ -107,8 +103,7 @@ class _SignUpFormState extends State<SignUpForm>{
                 borderSide: BorderSide.none,
               ),
             ),
-            onChanged: (value) {
-            },
+            onChanged: (value) {},
           ),
 
           const SizedBox(height: 20),
@@ -136,8 +131,7 @@ class _SignUpFormState extends State<SignUpForm>{
                 borderSide: BorderSide.none,
               ),
             ),
-            onChanged: (value) {
-            },
+            onChanged: (value) {},
           ),
           const SizedBox(height: 20),
           TextFormField(
@@ -147,8 +141,7 @@ class _SignUpFormState extends State<SignUpForm>{
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter your password';
-              }
-              else if (value.length < 5) {
+              } else if (value.length < 5) {
                 return 'The password must contains more than five characters.';
               }
               return null;
@@ -167,8 +160,7 @@ class _SignUpFormState extends State<SignUpForm>{
                 borderSide: BorderSide.none,
               ),
             ),
-            onChanged: (value) {
-            },
+            onChanged: (value) {},
           ),
 
           const SizedBox(height: 20),
@@ -179,8 +171,7 @@ class _SignUpFormState extends State<SignUpForm>{
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter your password confirmation';
-              }
-              else if (value != _passwordController.text) {
+              } else if (value != _passwordController.text) {
                 return "Password doesn't match.";
               }
               return null;
@@ -199,8 +190,7 @@ class _SignUpFormState extends State<SignUpForm>{
                 borderSide: BorderSide.none,
               ),
             ),
-            onChanged: (value) {
-            },
+            onChanged: (value) {},
           ),
 
           const SizedBox(height: 30),
@@ -209,24 +199,22 @@ class _SignUpFormState extends State<SignUpForm>{
             height: 50,
             width: double.infinity,
             child: ElevatedButton(
-                onPressed: () {
-                  // Validate the form when the button is pressed
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    // All fields are valid, proceed with login logic
-                    print("success");
-                  } else {
-                    print("Form is invalid. Please check the fields.");
-                  }
-                },
-                style: ButtonStyle( backgroundColor:WidgetStateProperty.all(AppColor.orange)),
-                child: const Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 18))
+              onPressed: () {
+                // Validate the form when the button is pressed
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  // All fields are valid, proceed with login logic
+                  print("success");
+                } else {
+                  print("Form is invalid. Please check the fields.");
+                }
+              },
+              style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColor.orange)),
+              child: const Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 18)),
             ),
           ),
-
         ],
       ),
     );
   }
-
 }

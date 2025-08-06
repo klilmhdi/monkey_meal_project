@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../helper/colors.dart';
+import '../../../core/consts/colors/colors.dart';
 import '../../helper/helper.dart';
 import '../sign_up/sign_up_screen.dart';
 import 'component/SignForm.dart';

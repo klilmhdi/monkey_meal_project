@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../helper/colors.dart';
+
+import '../../../core/consts/colors/colors.dart';
 import '../../helper/helper.dart';
 import '../sign_in/log_in_screen.dart';
-
 
 class LandingScreen extends StatelessWidget {
   static const routeName = "/landingScreen";
@@ -21,16 +21,11 @@ class LandingScreen extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Stack(
                 children: [
-
                   Positioned.fill(
                     child: CustomPaint(
                       painter: ShadowPainter(
                         clipper: CustomClipperAppBar(),
-                        boxShadow: const BoxShadow(
-                          color: AppColor.placeholder,
-                          offset: Offset(0, 15),
-                          blurRadius: 10,
-                        ),
+                        boxShadow: const BoxShadow(color: AppColor.placeholder, offset: Offset(0, 15), blurRadius: 10),
                       ),
                     ),
                   ),
@@ -42,12 +37,10 @@ class LandingScreen extends StatelessWidget {
                       height: Helper.getScreenHeight(context) * 0.5,
                       decoration: ShapeDecoration(
                         color: AppColor.orange, // Couleur de fond
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       ),
                       child: Image.asset(
-                       'assets/images/login_bg.png', // Image de fond
+                        'assets/images/login_bg.png', // Image de fond
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -58,7 +51,7 @@ class LandingScreen extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Image.asset(
-                'assets/images/MealMonkeyLogo.png' // Logo central
+                'assets/images/MealMonkeyLogo.png', // Logo central
               ),
             ),
             Align(
@@ -73,44 +66,31 @@ class LandingScreen extends StatelessWidget {
                       child: Text(
                         "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: AppColor.primary,
-                          fontSize: 15,
-                        ),
+                        style: TextStyle(color: AppColor.primary, fontSize: 15),
                       ),
                     ),
-                    const Spacer(
-                      flex: 1,
-                    ),
+                    const Spacer(flex: 1),
                     SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed(LoginScreen.routeName);
+                          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
                         },
-                        style: ButtonStyle(backgroundColor:  WidgetStateProperty.all(AppColor.orange)),
+                        style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColor.orange)),
                         child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 18)),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 20),
                     SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor:
-                          WidgetStateProperty.all(Colors.white),
-                          foregroundColor:
-                          WidgetStateProperty.all(AppColor.orange),
+                          backgroundColor: WidgetStateProperty.all(Colors.white),
+                          foregroundColor: WidgetStateProperty.all(AppColor.orange),
                           shape: WidgetStateProperty.all(
-                            const StadiumBorder(
-                              side:
-                              BorderSide(color: AppColor.orange, width: 1.5),
-                            ),
+                            const StadiumBorder(side: BorderSide(color: AppColor.orange, width: 1.5)),
                           ),
                         ),
                         onPressed: () {},
@@ -140,35 +120,16 @@ class CustomClipperAppBar extends CustomClipper<Path> {
     Offset endPoint3 = Offset(size.width * 0.75, size.height * 0.96);
     Offset controlPoint4 = Offset(size.width * 0.76, size.height);
     Offset endPoint4 = Offset(size.width * 0.79, size.height);
-    Path path = Path()
-      ..lineTo(0, size.height)
-      ..lineTo(size.width * 0.21, size.height)
-      ..quadraticBezierTo(
-        controlPoint.dx,
-        controlPoint.dy,
-        endPoint.dx,
-        endPoint.dy,
-      )
-      ..quadraticBezierTo(
-        controlPoint2.dx,
-        controlPoint2.dy,
-        endPoint2.dx,
-        endPoint2.dy,
-      )
-      ..quadraticBezierTo(
-        controlPoint3.dx,
-        controlPoint3.dy,
-        endPoint3.dx,
-        endPoint3.dy,
-      )
-      ..quadraticBezierTo(
-        controlPoint4.dx,
-        controlPoint4.dy,
-        endPoint4.dx,
-        endPoint4.dy,
-      )
-      ..lineTo(size.width, size.height)
-      ..lineTo(size.width, 0);
+    Path path =
+        Path()
+          ..lineTo(0, size.height)
+          ..lineTo(size.width * 0.21, size.height)
+          ..quadraticBezierTo(controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy)
+          ..quadraticBezierTo(controlPoint2.dx, controlPoint2.dy, endPoint2.dx, endPoint2.dy)
+          ..quadraticBezierTo(controlPoint3.dx, controlPoint3.dy, endPoint3.dx, endPoint3.dy)
+          ..quadraticBezierTo(controlPoint4.dx, controlPoint4.dy, endPoint4.dx, endPoint4.dy)
+          ..lineTo(size.width, size.height)
+          ..lineTo(size.width, 0);
 
     return path;
   }
@@ -194,12 +155,7 @@ class ShadowPainter extends CustomPainter {
     final Path offsetPath = path.transform(matrix4.storage);
 
     // Dessiner l'ombre
-    canvas.drawShadow(
-      offsetPath,
-      boxShadow.color,
-      boxShadow.blurRadius,
-      true,
-    );
+    canvas.drawShadow(offsetPath, boxShadow.color, boxShadow.blurRadius, true);
   }
 
   @override

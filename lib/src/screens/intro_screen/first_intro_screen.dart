@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../helper/colors.dart'; // Assurez-vous que le chemin est correct
+import '../../../core/consts/colors/colors.dart'; // Assurez-vous que le chemin est correct
 import '../../helper/helper.dart'; // Assurez-vous que le chemin est correct
 import '../home/home_screen.dart'; // Assurez-vous que le chemin est correct et que HomeScreen a un routeName défini
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../constantes/const.dart';
-import '../../../helper/colors.dart';
+import '../../../../core/consts/strings/strings.dart';
+import '../../../../core/consts/colors/colors.dart';
 import '../../forgot_password/forgot_password.dart';
 
 class SignForm extends StatefulWidget {

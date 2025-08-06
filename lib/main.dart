@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/routes.dart';
 import 'package:monkey_meal_project/src/screens/splash/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-
-void main() {
+void main() async {
+  await WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
