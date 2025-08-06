@@ -4,6 +4,7 @@ import 'package:monkey_meal_project/src/screens/forgot_password/new_password_scr
 import 'package:monkey_meal_project/src/screens/forgot_password/send_otp_screen.dart';
 import 'package:monkey_meal_project/src/screens/home/home_screen.dart';
 import 'package:monkey_meal_project/src/screens/intro_screen/first_intro_screen.dart';
+import 'package:monkey_meal_project/src/screens/profile_screen/profile_screen.dart';
 import 'package:monkey_meal_project/src/screens/sign_in/log_in_screen.dart';
 import 'package:monkey_meal_project/src/screens/sign_up/sign_up_screen.dart';
 import 'package:monkey_meal_project/src/screens/splash/landing_screen.dart';
@@ -21,7 +22,7 @@ final Map<String, WidgetBuilder> routes = {
   SendOTPScreen.routeName: (context) =>  SendOTPScreen(),
   FirstIntroScreen.routeName: (context) =>  FirstIntroScreen(),
   HomeScreen.routeName: (context) =>  HomeScreen(),
-
+ProfileScreen.routeName:(context)=>ProfileScreen()
 
 
 };
