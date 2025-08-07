@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/src/screens/profile_screen/component/custom_text_form_field.dart';
+import 'package:monkey_meal_project/src/screens/profile_screen/component/profile_form.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = '/profile';
@@ -46,6 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Text('Hi there Emilia!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 30),
             // Name Field
+            ProfileForm()
             ],
         ),
       ),

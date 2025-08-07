@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/src/screens/inbox_screen/inbox_screen.dart';
+import 'package:monkey_meal_project/src/screens/notifications_screen/notification_screen.dart';
+import 'package:monkey_meal_project/src/screens/orders_screen/order_screen.dart';
+import 'package:monkey_meal_project/src/screens/payment/payment_screen.dart';
 
 import 'component/more_item.dart';
 class MoreScreen extends StatelessWidget {
@@ -24,24 +28,33 @@ class MoreScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
-        children: const [
+        children:  [
           MoreItem(
             icon: Icons.monetization_on,
             title: 'Payment Details',
-
+onTap:(){
+              Navigator.pushNamed(context,PaymentScreen.routeName);},
           ),
           MoreItem(
             icon: Icons.shopping_bag,
             title: 'My Orders',
+            onTap:(){
+              Navigator.pushNamed(context,OrderScreen.routeName);},
+
           ),
           MoreItem(
             icon: Icons.notifications,
             title: 'Notifications',
             badge: 15,
+            onTap:(){
+              Navigator.pushNamed(context,NotificationScreen.routeName);},
+
           ),
           MoreItem(
             icon: Icons.inbox,
             title: 'Inbox',
+            onTap:(){
+              Navigator.pushNamed(context,InboxScreen.routeName);},
           ),
           MoreItem(
             icon: Icons.info,

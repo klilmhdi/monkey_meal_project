@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 class NotificationScreen extends StatefulWidget {
+  static String routeName='/notificationRoute';
+
   const NotificationScreen({super.key});
 
   @override
@@ -9,6 +11,16 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+    return Scaffold(
+      appBar: AppBar(title: Text('Notification'),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.shopping_cart),
+          onPressed: () {},
+        ),
+      ],),
+      body: Column(
+        children: [],
+      ),
+    );  }
 }

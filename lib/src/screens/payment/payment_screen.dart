@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 class PaymentScreen extends StatefulWidget {
+  static String routeName='/paymentRoute';
+
   const PaymentScreen({super.key});
 
   @override
@@ -9,6 +11,17 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+    return Scaffold(
+      appBar: AppBar(title: Text('Payment Details'),
+      actions: [InkWell(
+        onTap: (){},
+        child:     IconButton(
+          icon: const Icon(Icons.shopping_cart),
+          onPressed: () {},
+        ),
+      )],),
+      body: Column(
+        children: [],
+      ),
+    );  }
 }

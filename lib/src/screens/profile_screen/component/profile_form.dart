@@ -94,15 +94,18 @@ class _ProfileFormState extends State<ProfileForm> {
             },controller: _confirmPasswordController,
         keyboardType: TextInputType.visiblePassword,
         onChanged: (value){},),
-        ElevatedButton(onPressed: (){},
 
-            child: Container(
-                decoration: BoxDecoration(
-                    color: AppColor.orange
-                    ,borderRadius:  BorderRadius.circular(16)
-                ),
-                child: Text('Save')))
-]
-    ));
+            SizedBox(
+              width: double.infinity,
+
+              child: ElevatedButton(onPressed: (){},
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColor.orange)),
+
+
+                      child: Text('Save'))),
+
+          ],
+        )
+);
   }
 }
