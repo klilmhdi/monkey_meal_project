@@ -4,125 +4,116 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
+import '../models/user_model.dart';
+
 class FirebaseServices {
-  ///==================== > Variables
-  final auth = FirebaseAuth.instance;
-  final firestore = FirebaseFirestore.instance;
-  final productID = const Uuid().v4();
-  final userID = const Uuid().v4();
-  final creditID = const Uuid().v1();
-  final CollectionReference productsCollection = FirebaseFirestore.instance.collection('products');
-  final CollectionReference usersCollection = FirebaseFirestore.instance.collection('users');
-  final uploadProductPics = FirebaseStorage.instance.ref().child("productsImages");
-  final uploadUserPics = FirebaseStorage.instance.ref().child("usersImages");
-  final currentId = FirebaseAuth.instance.currentUser?.uid ?? null;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
-  ///==================== > Init FCM Token
-  static Future<void> initFcmToken() async {
-    late final FirebaseMessaging? firebaseMessaging = FirebaseMessaging.instance;
-    final fcmToken = firebaseMessaging!.getToken();
-    fcmToken.then((token) => print("Token: $token")).catchError((onError) => onError.toString());
-  }
+  User? get currentUser => _auth.currentUser;
 
-  ///==================== > Login using email and password
-  Future<void> login(context, TextEditingController emailController,
-      TextEditingController passwordController) async {
-    await auth.signInWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
-    );
-  }
+  String? get currentUserId => _auth.currentUser?.uid;
 
-  ///==================== > Logout
-  Future<void> logout() async => await auth.signOut();
+  // Collections
+  CollectionReference get usersCollection => _firestore.collection('users');
 
-  ///==================== > Register using email
-  Future<UserCredential> signUpWithEmail({required String email, required String password}) async =>
-      await auth.createUserWithEmailAndPassword(email: email, password: password);
+  CollectionReference get productsCollection => _firestore.collection('products');
 
-  ///==================== > Register using google
-  Future<UserCredential> signUpWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  // Storage references
+  Reference get productsStorageRef => _storage.ref().child('productsImages');
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+  Reference get usersStorageRef => _storage.ref().child('usersImages');
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
-
-  ///==================== > upload user data to FirebaseFirestore
-  Future<void> uploadUserDataToFirebase(var uid,
-      {required var nameController,
-        required var imageController,
-        required var emailController,
-        required var phoneController}) async {
-    await firestore.collection("users").doc(uid).set({
-      'userId': uid,
-      'userName': nameController,
-      'userEmail': emailController,
-      'userPhone': phoneController,
-      'createdAt': Timestamp.now(),
-      'userAddress': "",
-      'userImage': "",
-      // 'userFavourites': [],
-      // 'userProducts': [],
-      // 'userPaymentMethods': []
-    });
-  }
-
-  ///==================== > upload products pics to FirebaseStorage
-  Future<void> uploadProductToFirebaseFirestore({
-    required XFile? pickedImage,
-    required var titleController,
-    required var priceController,
-    required var selectedCategory,
-    required var selectedSubCategory,
-    required var descriptionController,
-    required var quantityController,
-  }) async {
-    if (pickedImage != null) {
-      final ref = uploadProductPics.child('$productID.jpg');
-      await ref.putFile(File(pickedImage.path));
-      final productImageUrl = await ref.getDownloadURL();
-      await FirebaseFirestore.instance.collection("products").doc(productID).set({
-        'productId': productID,
-        'productTitle': titleController,
-        'productPrice': priceController,
-        'productImage': productImageUrl,
-        'productCategory': selectedCategory.toString().trim(),
-        'productSubCategory': selectedSubCategory.toString().trim(), // Convert enum to string
-        'productDescription': descriptionController,
-        'productQuantity': quantityController,
-        'createdAt': Timestamp.now(),
-      });
+  /// Initialize FCM token
+  Future<String?> getFcmToken() async {
+    try {
+      return await _messaging.getToken();
+    } catch (e) {
+      print('Error getting FCM token: $e');
+      return null;
     }
   }
 
-  ///==================== > upload users pics to FirebaseStorage
-  Future<void> uploadUserPicToFirebaseStorage(
-      {required XFile? pickedImage, required String productImageUrl}) async {
-    if (pickedImage != null) {
-      final ref = FirebaseStorage.instance.ref().child("usersImages").child('$productID.jpg');
-      await ref.putFile(File(pickedImage.path));
-      productImageUrl = await ref.getDownloadURL();
+  /// Email & Password Authentication
+  Future<User> signInWithEmail(String email, String password) async {
+    try {
+      final userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      return userCredential.user!;
+    } on FirebaseAuthException catch (e) {
+      throw _handleAuthException(e);
     }
   }
 
-  ///==================== > get user data from FirebaseFirestore
-  Future<void> getUserDataFromFirebase(uid) async =>
-      FirebaseFirestore.instance.collection("users").doc(uid).get();
+  Future<UserCredential> signUpWithEmail(String email, String password) async {
+    try {
+      return await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw _handleAuthException(e);
+    }
+  }
 
-  ///==================== > delete product data from FirebaseFirestore
-  Future<void> deleteProductDataFromFirebase(productID) async =>
-      await FirebaseFirestore.instance.collection("products").doc(productID).delete();
+  Future<void> signOut() async => await _auth.signOut();
+
+  /// Google Sign In
+  Future<UserCredential> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      return await _auth.signInWithCredential(credential);
+    } catch (e) {
+      print('Google sign in error: $e');
+      rethrow;
+    }
+  }
+
+  /// User Management
+  Future<void> createUser(UserModel user) async {
+    try {
+      await usersCollection.doc(user.id).set(user.toJson());
+    } catch (e) {
+      print('Error creating user: $e');
+      rethrow;
+    }
+  }
+
+  Future<UserModel> getUser(String userId) async {
+    try {
+      final doc = await usersCollection.doc(userId).get();
+      return UserModel.fromJson(doc.data() as Map<String, dynamic>, doc.id);
+    } catch (e) {
+      print('Error getting user: $e');
+      rethrow;
+    }
+  }
+
+  /// Image Upload
+  Future<String> uploadUserImage(String userId, File imageFile) async {
+    try {
+      final ref = usersStorageRef.child('$userId.jpg');
+      await ref.putFile(imageFile);
+      return await ref.getDownloadURL();
+    } catch (e) {
+      print('Error uploading user image: $e');
+      rethrow;
+    }
+  }
+
+  /// Helper Methods
+  FirebaseAuthException _handleAuthException(FirebaseAuthException e) {
+    print('Auth error (${e.code}): ${e.message}');
+    return e;
+  }
 }

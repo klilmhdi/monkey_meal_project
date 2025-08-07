@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:monkey_meal_project/src/widgets/custom_snackbar/build_custom_snackbar_widget.dart';
 
@@ -12,10 +13,16 @@ class LoginCubit extends Cubit<LoginState> {
 
   static LoginCubit get(context) => BlocProvider.of(context, listen: false);
 
-  Future<void> login(context, {required emailController, required passwordController}) async {
+  Future<void> login(
+    context, {
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
+  }) async {
     emit(LoadingLoginState());
     try {
-      await FirebaseServices().login(context, emailController, passwordController).then((user) {
+      await FirebaseServices().signUpWithEmail(emailController.text.trim(), passwordController.text.trim()).then((
+        user,
+      ) {
         // navAndFinish(context, Layout());
         emit(SuccessLoginState(user as User));
       });
@@ -46,15 +53,15 @@ class LoginCubit extends Cubit<LoginState> {
           emit(FailedLoginState("Too many requests"));
           break;
         default:
-          print(">>>>>>>>>>>Error: " + firebaseMessage.message.toString());
-          print(">>>>>>>>>>>StackTrace: " + firebaseMessage.stackTrace.toString());
+          print(">>>>>>>>>>>Error: ${firebaseMessage.message}");
+          print(">>>>>>>>>>>StackTrace: ${firebaseMessage.stackTrace}");
           showErrorSnackBar("An unknown error occurred", 3, context);
           emit(FailedLoginState('An unknown error occurred'));
           break;
       }
     } catch (e) {
       showErrorSnackBar("Login Failed!! ${e.toString()}", 3, context);
-      emit(FailedLoginState("Login Failed!!" + e.toString()));
+      emit(FailedLoginState("Login Failed!!$e"));
     }
   }
 }
