@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/src/screens/profile_screen/component/custom_text_form_field.dart';
+import 'package:monkey_meal_project/src/widgets/custom_bottom_nav_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = '/profile';
@@ -17,7 +18,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Profile'), actions: [IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {})]),
-      body: SingleChildScrollView(
+      body:
+      SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
@@ -66,6 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: 3, onTap: (index){}),
     );
   }
 }
