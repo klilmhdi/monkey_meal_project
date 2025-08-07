@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 
-class CustomTextFormField extends StatefulWidget {
+class CustomTextFormField extends StatelessWidget {
   final String label;
   final String value;
   final bool obscureText;
+  final TextEditingController? controller;
+ final TextInputType? keyboardType;
+ final String? Function(String?)? validator;
+ final void Function(String)? onChanged;
+ final void Function(String?)? onSaved;
+  CustomTextFormField({super.key, required this.label, required this.value,
+    this.keyboardType,this.validator,
+    this.onChanged,this.onSaved,
+    this.controller, this.obscureText = false});
 
-  CustomTextFormField({super.key, required this.label, required this.value, this.obscureText = false});
-
-  @override
-  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
-}
-
-class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: AppColor.placeholder, borderRadius: BorderRadius.circular(10)),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      child: TextField(
+      child: TextFormField(
+          controller:controller,
+        keyboardType: keyboardType,
+        validator:validator ,
+        onChanged: onChanged,
+        onSaved: onSaved,
         decoration: InputDecoration(
-          labelText: widget.label,
+          contentPadding: EdgeInsets.all(10),
+          labelText: label,
           labelStyle: TextStyle(color: Colors.grey[600]),
           border: InputBorder.none,
         ),
-        controller: TextEditingController(text: widget.value),
-        obscureText: widget.obscureText,
+        obscureText: obscureText,
       ),
     );
   }

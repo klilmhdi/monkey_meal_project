@@ -46,24 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Text('Hi there Emilia!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 30),
             // Name Field
-            CustomTextFormField(label: 'Name', value: 'Emilia Clarke'),
-            SizedBox(height: 15),
-            // Email Field
-            CustomTextFormField(label: 'Email', value: 'emiliaclarke@email.com'),
-            SizedBox(height: 15),
-            // Mobile No Field
-            CustomTextFormField(label: 'Mobile No', value: 'emiliaclarke@email.com'),
-            // Typo in image, I'll use the one from the image
-            SizedBox(height: 15),
-            // Address Field
-            CustomTextFormField(label: 'Address', value: 'No 23, 6th Lane, Colombo 03'),
-            SizedBox(height: 15),
-            // Password Field
-            CustomTextFormField(label: 'Password', value: '************', obscureText: true),
-            SizedBox(height: 15),
-            // Confirm Password Field
-            CustomTextFormField(label: 'Confirm Password', value: '************', obscureText: true),
-          ],
+            ],
         ),
       ),
     );
