@@ -21,6 +21,11 @@ android {
 
     defaultConfig {
         applicationId = "com.example.monkey_meal_project"
+<<<<<<< HEAD
+=======
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+>>>>>>> master
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
