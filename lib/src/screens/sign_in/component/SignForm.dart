@@ -39,7 +39,7 @@ class _SignFormState extends State<SignForm> {
         listener: (context, state) {
           if (state is SuccessLoginState) {
             showSuccessSnackBar("Login successful", 3, context);
-            Helper.navAndFinish(context, const HomeScreen());
+            Helper.navAndFinish(context,  HomeScreen());
           }
         },
         builder: (context, state) {
