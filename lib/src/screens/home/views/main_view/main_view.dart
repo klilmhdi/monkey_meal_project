@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/src/widgets/home_widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:monkey_meal_project/src/widgets/home_widgets/custom_search_app_bar/custom_search_app_bar.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/Food_type_list.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/items_list.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/most_popular_resturant._list.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/resturant_header.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/resturant_list.dart';
 
+import 'component/Food_type_list.dart';
+import 'component/items_list.dart';
+import 'component/resturant_section/most_popular_resturant._list.dart';
+import 'component/resturant_section/resturant_header.dart';
+import 'component/resturant_section/resturant_list.dart';
 class MainView extends StatelessWidget {
   const MainView({super.key});
 
