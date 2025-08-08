@@ -1,21 +1,46 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../helper/helper.dart';
 import 'landing_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   static String routeName = "/splash";
 
   @override
-  Widget build(BuildContext context) {
-    // Function to navigate to landing page after 5 seconds
-    Future.delayed(const Duration(seconds: 4), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LandingScreen()));
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _timer = Timer(const Duration(seconds: 4), () {
+        if (mounted) {
+          Helper.navAndFinish(context, const LandingScreen());
+        }
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    // إلغاء المؤقت في حال تم الخروج من الشاشة قبل انتهاء الوقت
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: Helper.getScreenWidth(context),
         height: Helper.getScreenHeight(context),
         child: Stack(

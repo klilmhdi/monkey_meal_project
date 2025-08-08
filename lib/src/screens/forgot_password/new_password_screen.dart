@@ -26,7 +26,6 @@ class NewPwScreen extends StatelessWidget {
                 Text(
                   "New Password",
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontFamily: 'assets/fonts/Metropolis-ExtraBold.ttf',
                     fontSize: 30,
                   ),
                 ),
@@ -34,7 +33,7 @@ class NewPwScreen extends StatelessWidget {
                 Text(
                   "Please enter your email to recieve a link to create a new password via email",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey.shade600, fontFamily: 'assets/fonts/Metropolis-Medium.ttf'),
+                  style: TextStyle(color: Colors.grey.shade600),
                 ),
                 SizedBox(height: 30),
                 TextFormField(

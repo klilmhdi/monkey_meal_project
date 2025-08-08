@@ -30,7 +30,7 @@ class SendOTPScreen extends StatelessWidget {
               Text(
                 "Please check your mobile number 071*****12 continue to reset your password",
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey.shade600, fontFamily: 'assets/fonts/Metropolis-Medium.ttf'),
+                style: TextStyle(color: Colors.grey.shade600),
               ),
               SizedBox(height: 50),
               Row(

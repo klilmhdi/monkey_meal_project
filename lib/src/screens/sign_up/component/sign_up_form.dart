@@ -1,220 +1,147 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:monkey_meal_project/core/consts/colors/colors.dart';
+import 'package:monkey_meal_project/src/helper/helper.dart';
+import 'package:monkey_meal_project/src/screens/home/home_screen.dart';
 
-import '../../../../core/consts/colors/colors.dart';
-import '../../../../core/consts/strings/strings.dart';
+import '../../../../core/consts/validator/validation.dart';
+import '../../../manage/auth_cubit/signup_cubit/signup_cubit.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
 
   @override
-  _SignUpFormState createState() => _SignUpFormState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _phonenumbereController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _addressController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _addressController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextFormField(
-            controller: _nameController,
-            keyboardType: TextInputType.text,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your name';
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              hintText: "Name",
-              suffixStyle: (TextStyle(color: AppColor.orange)),
-              fillColor: Color(0xFFe5e5e5),
-              filled: true,
-              hintStyle: TextStyle(color: Color(0xFFbcb8b1)),
-              contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide.none,
+    return BlocBuilder<SignupCubit, SignupState>(
+      builder: (context, state) {
+        final cubit = context.read<SignupCubit>();
+
+        return Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              _buildTextField(
+                controller: _nameController,
+                hintText: 'Name',
+                validator: (value) => ValidationUtils.validateName(value),
               ),
-            ),
-            onChanged: (value) {},
-          ),
-
-          const SizedBox(height: 20),
-
-          TextFormField(
-            controller: _emailController,
-            keyboardType: TextInputType.emailAddress,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return kEmailNullError; // Return the actual error message
-              } else if (!emailValidatorRegExp.hasMatch(value)) {
-                return kInvalidEmailError; // Return the actual error message
-              }
-              return null; // Return null if valid
-            },
-            decoration: const InputDecoration(
-              hintText: "Email",
-              suffixStyle: (TextStyle(color: AppColor.orange)),
-              fillColor: Color(0xFFe5e5e5),
-              filled: true,
-              hintStyle: TextStyle(color: Color(0xFFbcb8b1)),
-              contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide.none,
+              const SizedBox(height: 20),
+              _buildTextField(
+                controller: _emailController,
+                hintText: 'Email',
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) => ValidationUtils.validateEmail(value),
               ),
-            ),
-            onChanged: (value) {},
-          ),
-
-          const SizedBox(height: 20),
-
-          TextFormField(
-            controller: _phonenumbereController,
-            keyboardType: TextInputType.phone,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your phone number';
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              hintText: "Phone number",
-
-              suffixStyle: (TextStyle(color: AppColor.orange)),
-              fillColor: Color(0xFFe5e5e5),
-              filled: true,
-              hintStyle: TextStyle(color: Color(0xFFbcb8b1)),
-              contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide.none,
+              const SizedBox(height: 20),
+              _buildTextField(
+                controller: _phoneController,
+                hintText: 'Phone Number',
+                keyboardType: TextInputType.phone,
+                validator: (value) => ValidationUtils.validatePhone(value),
               ),
-            ),
-            onChanged: (value) {},
-          ),
-
-          const SizedBox(height: 20),
-
-          TextFormField(
-            controller: _addressController,
-            keyboardType: TextInputType.text,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your address';
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              hintText: "Address",
-
-              suffixStyle: (TextStyle(color: AppColor.orange)),
-              fillColor: Color(0xFFe5e5e5),
-              filled: true,
-              hintStyle: TextStyle(color: Color(0xFFbcb8b1)),
-              contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide.none,
+              const SizedBox(height: 20),
+              _buildTextField(
+                controller: _addressController,
+                hintText: 'Address',
+                validator: (value) => ValidationUtils.validateAddress(value),
               ),
-            ),
-            onChanged: (value) {},
-          ),
-          const SizedBox(height: 20),
-          TextFormField(
-            controller: _passwordController,
-            keyboardType: TextInputType.text,
-            obscureText: true,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your password';
-              } else if (value.length < 5) {
-                return 'The password must contains more than five characters.';
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              hintText: "Password",
-
-              suffixStyle: (TextStyle(color: AppColor.orange)),
-              fillColor: Color(0xFFe5e5e5),
-              filled: true,
-              hintStyle: TextStyle(color: Color(0xFFbcb8b1)),
-              contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide.none,
+              const SizedBox(height: 20),
+              _buildTextField(
+                controller: _passwordController,
+                hintText: 'Password',
+                obscureText: !cubit.isPasswordVisible,
+                suffixIcon: IconButton(
+                  icon: Icon(cubit.isPasswordVisible ? Icons.visibility : Icons.visibility_off, color: AppColor.orange),
+                  onPressed: cubit.togglePasswordVisibility,
+                ),
+                validator: (value) => ValidationUtils.validatePassword(value),
               ),
-            ),
-            onChanged: (value) {},
-          ),
-
-          const SizedBox(height: 20),
-          TextFormField(
-            controller: _confirmPasswordController,
-            keyboardType: TextInputType.text,
-            obscureText: true,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your password confirmation';
-              } else if (value != _passwordController.text) {
-                return "Password doesn't match.";
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              hintText: "Confirm password",
-
-              suffixStyle: (TextStyle(color: AppColor.orange)),
-              fillColor: Color(0xFFe5e5e5),
-              filled: true,
-              hintStyle: TextStyle(color: Color(0xFFbcb8b1)),
-              contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide.none,
+              const SizedBox(height: 20),
+              _buildTextField(
+                controller: _confirmPasswordController,
+                hintText: 'Confirm Password',
+                obscureText: !cubit.isPasswordVisible,
+                validator: (value) => ValidationUtils.validateConfirmPassword(value, _passwordController.text),
               ),
-            ),
-            onChanged: (value) {},
+              const SizedBox(height: 30),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColor.orange,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  ),
+                  onPressed: () => _submitForm(cubit),
+                  child: const Text('Sign Up', style: TextStyle(color: Colors.white, fontSize: 18)),
+                ),
+              ),
+            ],
           ),
-
-          const SizedBox(height: 30),
-
-          SizedBox(
-            height: 50,
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                // Validate the form when the button is pressed
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  // All fields are valid, proceed with login logic
-                  print("success");
-                } else {
-                  print("Form is invalid. Please check the fields.");
-                }
-              },
-              style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColor.orange)),
-              child: const Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 18)),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hintText,
+    TextInputType? keyboardType,
+    bool obscureText = false,
+    Widget? suffixIcon,
+    String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        hintText: hintText,
+        filled: true,
+        fillColor: const Color(0xFFe5e5e5),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
+        suffixIcon: suffixIcon,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+      ),
+      validator: validator,
+    );
+  }
+
+  void _submitForm(SignupCubit cubit) {
+    if (_formKey.currentState!.validate()) {
+      cubit
+          .signUpWithEmail(
+            name: _nameController.text.trim(),
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+            phone: _phoneController.text.trim(),
+            address: _addressController.text.trim(),
+          )
+          .then((_) => Helper.navAndFinish(context, HomeScreen()));
+    }
   }
 }

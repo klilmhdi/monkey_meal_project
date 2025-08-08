@@ -33,7 +33,7 @@ class ForgetPwScreen extends StatelessWidget {
                 Text(
                   "Please enter your email to recieve a link to create a new password via email",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey.shade600, fontFamily: 'assets/fonts/Metropolis-Medium.ttf'),
+                  style: TextStyle(color: Colors.grey.shade600),
                 ),
                 Spacer(flex: 2),
                 TextFormField(
