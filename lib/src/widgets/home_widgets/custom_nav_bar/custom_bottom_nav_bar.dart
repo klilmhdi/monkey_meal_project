@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/src/helper/helper.dart';
+import 'package:monkey_meal_project/src/widgets/home_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
@@ -83,38 +84,3 @@ class CustomBottomNavBar extends StatelessWidget {
   }
 }
 
-class BottomNavCurvePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = Colors.white
-          ..style = PaintingStyle.fill;
-
-    final path = Path();
-    final width = size.width;
-    final height = size.height;
-
-    path.moveTo(0, 0);
-    path.lineTo(width * .30, 0);
-
-    path.quadraticBezierTo(width * .34, 0, width * .375, 30);
-
-    path.arcToPoint(
-      Offset(width * .625, 30),
-      radius: Radius.circular(50),
-      clockwise: false,
-    );
-    path.quadraticBezierTo(width * .66, 0, width * .70, 0);
-
-    path.lineTo(width, 0);
-    path.lineTo(width, height);
-    path.lineTo(0, height);
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
