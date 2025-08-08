@@ -22,7 +22,7 @@ final Map<String, WidgetBuilder> routes = {
   SendOTPScreen.routeName: (context) =>  SendOTPScreen(),
   FirstIntroScreen.routeName: (context) =>  FirstIntroScreen(),
   HomeScreen.routeName: (context) =>  HomeScreen(),
-ProfileScreen.routeName:(context)=>ProfileScreen()
+// ProfileScreen.routeName:(context)=>ProfileScreen()
 
 
 };

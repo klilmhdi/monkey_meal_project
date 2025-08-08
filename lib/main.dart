@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/routes.dart';
-import 'package:monkey_meal_project/src/screens/splash/splash_screen.dart';
+import 'package:monkey_meal_project/src/screens/home/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: "Metropolis"
+      ),
       debugShowCheckedModeBanner: false,
       /* home: Scaffold(
         body: Center(
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
 
         ),
       ),*/
-      initialRoute: SplashScreen.routeName,
+      initialRoute: HomeScreen.routeName,
       routes: routes,
     );
   }
