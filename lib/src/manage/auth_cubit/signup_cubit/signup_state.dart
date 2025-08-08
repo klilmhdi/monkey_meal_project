@@ -1,41 +1,39 @@
 part of 'signup_cubit.dart';
 
-class SignupState extends Equatable {
+abstract class SignupState extends Equatable {
   const SignupState();
 
-  @override
-  // TODO: implement props
-  List<Object?> get props => [];
-}
-
-final class SignupInitial extends SignupState {
   @override
   List<Object> get props => [];
 }
 
-class LoadingCreateUserState extends SignupState {}
+class SignupInitial extends SignupState {}
 
-class SuccessCreateUserState extends SignupState {}
+class SignupLoading extends SignupState {}
 
-class ErrorCreateUserState extends SignupState {
-  ErrorCreateUserState(String error);
+class SignupSuccess extends SignupState {
+  final UserModel user;
+
+  const SignupSuccess(this.user);
+
+  @override
+  List<Object> get props => [user];
 }
 
-// signup with google states
-class LoadingSignInWithGoogleState extends SignupState {}
+class SignupError extends SignupState {
+  final String message;
 
-class SuccessSignInWithGoogleState extends SignupState {
-  SuccessSignInWithGoogleState(User user);
+  const SignupError(this.message);
+
+  @override
+  List<Object> get props => [message];
 }
 
-class SuccessSortDateToFirebaseAfterSignInWithGoogleState extends SignupState {
-  SuccessSortDateToFirebaseAfterSignInWithGoogleState(void value);
-}
+class PasswordVisibilityChanged extends SignupState {
+  final bool isVisible;
 
-class ErrorSignInWithGoogleState extends SignupState {
-  ErrorSignInWithGoogleState(String error);
-}
+  const PasswordVisibilityChanged(this.isVisible);
 
-class ChangePasswordVisible extends SignupState {
-  ChangePasswordVisible(bool? visible);
+  @override
+  List<Object> get props => [isVisible];
 }

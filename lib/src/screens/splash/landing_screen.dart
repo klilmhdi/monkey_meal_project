@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/src/screens/sign_up/sign_up_screen.dart';
 
 import '../../../core/consts/colors/colors.dart';
 import '../../helper/helper.dart';
@@ -75,7 +76,8 @@ class LandingScreen extends StatelessWidget {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                          // Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
                         },
                         style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColor.orange)),
                         child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 18)),
@@ -93,7 +95,9 @@ class LandingScreen extends StatelessWidget {
                             const StadiumBorder(side: BorderSide(color: AppColor.orange, width: 1.5)),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpScreen()));
+                        },
                         child: const Text("Create an Account", style: TextStyle(fontSize: 18)),
                       ),
                     ),
