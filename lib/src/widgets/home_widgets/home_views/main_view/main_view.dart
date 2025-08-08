@@ -40,7 +40,9 @@ class MainView extends StatelessWidget {
           ResturantHeader(title: "Most Popular",),
           MostPopularResturantList(),
           SizedBox(height: 16,),
+          ResturantHeader(title: "ٌRecent Items",),
           ItemsList(),
+          SizedBox(height: 24,),
         ],
       ),
     );
