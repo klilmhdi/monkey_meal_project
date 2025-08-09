@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/src/screens/profile_screen/component/custom_text_form_field.dart';
-import 'package:monkey_meal_project/src/widgets/custom_bottom_nav_bar.dart';
+import 'package:monkey_meal_project/src/widgets/home_widgets/custom_nav_bar/custom_bottom_nav_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = '/profile';
