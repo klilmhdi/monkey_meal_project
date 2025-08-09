@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             (_, child) => MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: ThemeData(fontFamily: 'Metropolis'),
-              initialRoute: SplashScreen.routeName,
+              initialRoute: ProfileScreen.routeName,
               routes: routes,
             ),
       ),

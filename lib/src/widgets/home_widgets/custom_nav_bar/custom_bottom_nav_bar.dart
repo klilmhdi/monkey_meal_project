@@ -14,15 +14,20 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = Helper.getScreenWidth(context);
+
     return SizedBox(
       height: 90,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
+          // Painted background with shadow
           CustomPaint(
-            size: Size(Helper.getScreenWidth(context), 80),
+            size: Size(screenWidth, 100),
             painter: BottomNavCurvePainter(),
           ),
+
+          // Navigation icons
           Positioned(
             bottom: 35,
             left: 0,
@@ -32,27 +37,34 @@ class CustomBottomNavBar extends StatelessWidget {
               children: [
                 _buildNavIcon(Icons.grid_view_sharp, 0, 'Menu'),
                 _buildNavIcon(Icons.shopping_bag, 1, 'Offers'),
-                SizedBox(width: 80),
+                const SizedBox(width: 80), // Space for the center button
                 _buildNavIcon(Icons.person, 3, 'Profile'),
                 _buildNavIcon(Icons.read_more_outlined, 4, 'More'),
               ],
             ),
           ),
+
+          // Floating home button
           Positioned(
             top: -35,
-            left: Helper.getScreenWidth(context) / 2 - 40,
-
+            left: screenWidth / 2 - 40,
             child: GestureDetector(
-              onTap: ()=>onTap(2),
+              onTap: () => onTap(2),
               child: Container(
                 height: 80,
                 width: 80,
                 decoration: BoxDecoration(
                   color: currentIndex == 2 ? Colors.orange : Colors.grey,
                   shape: BoxShape.circle,
-                  boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 8)],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 15,
+                      offset: const Offset(0, -5),
+                    ),
+                  ],
                 ),
-                child: Icon(Icons.home, color: Colors.white, size: 45),
+                child: const Icon(Icons.home, color: Colors.white, size: 45),
               ),
             ),
           ),
@@ -65,17 +77,22 @@ class CustomBottomNavBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(index),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
             icon,
             color: currentIndex == index ? Colors.orange : Colors.grey,
             size: 20,
           ),
+          const SizedBox(height: 4),
           Text(
             iconName,
             style: TextStyle(
               fontSize: 12,
               color: currentIndex == index ? Colors.orange : Colors.grey,
+              fontWeight: currentIndex == index
+                  ? FontWeight.w600
+                  : FontWeight.normal,
             ),
           ),
         ],
@@ -83,4 +100,3 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 }
-
