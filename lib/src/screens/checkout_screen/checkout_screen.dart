@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_button.dart';
 import 'package:monkey_meal_project/core/shared_widgets/summary_row_widget.dart';
+import 'package:monkey_meal_project/src/screens/change_address_screen/change_address_screen.dart';
 import 'package:monkey_meal_project/src/screens/checkout_screen/component/payment_method_item.dart';
 class CheckoutScreen extends StatelessWidget {
   static String routeName = '/checkoutRoute';
@@ -11,14 +12,15 @@ class CheckoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //bottomSheet: CustomBottomSheet(),
 
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Text(
           'Checkout',
@@ -102,7 +104,12 @@ CustomButton(title: 'Send order',onPressed: (){
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
     ),
-    builder: (_) => const CustomBottomSheet(),
+    builder: (_) =>  CustomBottomSheet(
+      onPressed:() {
+        Navigator.popAndPushNamed(context, ChangeAddressScreen.routeName);
+
+        },
+    ),
   );},)
             ],
           ),

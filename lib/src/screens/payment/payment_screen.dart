@@ -39,7 +39,10 @@ CustomButton(title: '+ Add Another Credit/Debit Card',onPressed: (){
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
     ),
-    builder: (_) => const CustomBottomSheet(),
+    builder: (_) =>  CustomBottomSheet(onPressed: (){
+
+      Navigator.pop(context);
+    },),
   );
 },)
           ],

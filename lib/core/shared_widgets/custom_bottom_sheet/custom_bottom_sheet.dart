@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_bottom_sheet/custom_text_form_field.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_button.dart';
 import 'package:monkey_meal_project/src/helper/helper.dart';
 class CustomBottomSheet extends StatefulWidget {
-  const CustomBottomSheet({super.key});
+final void Function()? onPressed;
+  const CustomBottomSheet({super.key,this.onPressed});
 
   @override
   State<CustomBottomSheet> createState() => _CustomBottomSheetState();
@@ -62,12 +64,14 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
               const Text("You can remove this card at anytime"),
               Switch(
                 value: false,
+
+                activeColor: AppColor.orange,
                 onChanged: (value) {},
               ),
             ],
           ),
           const SizedBox(height: 20),
-          CustomButton(title: '+ \t Add Card',)
+          CustomButton(title: '+ \t Add Card',onPressed:widget.onPressed ,)
 
         ],
       ),
