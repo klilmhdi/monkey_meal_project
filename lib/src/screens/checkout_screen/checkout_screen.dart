@@ -100,7 +100,7 @@ CustomButton(title: 'Send order',onPressed: (){
     context: context,
     isScrollControlled: true, // so it can expand when keyboard opens
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
     ),
     builder: (_) => const CustomBottomSheet(),
   );},)

@@ -34,6 +34,8 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
           ,const SizedBox(height: 10),
           Row(
             children: [
+              Text('Expiry',style: TextStyle(fontFamily: 'Metropolis',fontWeight: FontWeight.w700),),
+              SizedBox(width: 16,),
               Expanded(child: CustomTextFormField(hint: 'MM',keyboardType: TextInputType.number,))
 
              , const SizedBox(width: 10),
