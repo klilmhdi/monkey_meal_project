@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:monkey_meal_project/src/screens/checkout_screen/checkout_screen.dart';
 import 'package:monkey_meal_project/src/screens/forgot_password/forgot_password.dart';
 import 'package:monkey_meal_project/src/screens/forgot_password/new_password_screen.dart';
 import 'package:monkey_meal_project/src/screens/forgot_password/send_otp_screen.dart';
@@ -29,7 +30,7 @@ final Map<String, WidgetBuilder> routes = {
   InboxScreen.routeName: (context) =>  InboxScreen(),
   PaymentScreen.routeName: (context) =>  PaymentScreen(),
   OrderScreen.routeName: (context) =>  OrderScreen(),
-
+CheckoutScreen.routeName:(context)=>CheckoutScreen()
 
 
 };

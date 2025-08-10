@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/src/helper/helper.dart';
+import 'package:monkey_meal_project/src/models/order_model.dart';
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key});
+  final OrderModel orderModel;
+  const OrderCard({super.key, required this.orderModel});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Helper.getScreenHeight(context) * .1,
+      height: Helper.getScreenHeight(context) * .2,
       child: Container(
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
@@ -22,15 +24,14 @@ class OrderCard extends StatelessWidget {
           ],
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Burger image with rounded corners
             ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: Image.network(
-                'https://images.unsplash.com/photo-1568901346379-2470ec5ec6b0?q=80&w=254&auto=format&fit=crop',
-                width: 90,
-                height: 90,
+orderModel.imgUrl,
+                width: Helper.getScreenWidth(context)*0.2,
+                height: Helper.getScreenWidth(context)*0.2,
                 fit: BoxFit.cover,
               ),
             ),
@@ -40,11 +41,10 @@ class OrderCard extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Restaurant name
-                  const Text(
-                    'King Burgers',
+                   Text(
+                    orderModel.orderName,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

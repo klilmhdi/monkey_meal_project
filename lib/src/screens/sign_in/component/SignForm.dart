@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:monkey_meal_project/src/helper/helper.dart';
 import 'package:monkey_meal_project/src/manage/auth_cubit/login_cubit/login_cubit.dart';
 import 'package:monkey_meal_project/src/screens/home/home_screen.dart';
-import 'package:monkey_meal_project/src/widgets/custom_snackbar/build_custom_snackbar_widget.dart';
+import 'package:monkey_meal_project/core/shared_widgets/build_custom_snackbar_widget.dart';
 
 import '../../../../core/consts/colors/colors.dart';
 import '../../../../core/consts/strings/strings.dart';

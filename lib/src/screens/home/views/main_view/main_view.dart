@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/custom_app_bar/custom_app_bar.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/custom_search_app_bar/custom_search_app_bar.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_search_app_bar.dart';
 
 import 'component/Food_type_list.dart';
 import 'component/items_list.dart';

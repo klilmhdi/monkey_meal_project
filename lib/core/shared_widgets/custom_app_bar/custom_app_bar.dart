@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/custom_app_bar/custom_app_bar_icon.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/custom_app_bar/custom_app_bar_text.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_app_bar/custom_app_bar_icon.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_app_bar/custom_app_bar_text.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String text;

@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/src/models/resturant_model.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/resturant_card/Restrant_image.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/resturant_card/resturant_data.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/resturant_card/resturant_name.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/resturant_section/resturant_card/Restrant_image.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/resturant_section/resturant_card/resturant_data.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/resturant_section/resturant_card/resturant_name.dart';
 
 class RestaurantCard extends StatelessWidget {
  final RestaurantModel restaurantModel;

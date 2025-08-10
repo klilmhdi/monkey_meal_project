@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/most_popular_card/most_popular_card.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/resturant_section/most_popular_card/most_popular_card.dart';
 
 class MostPopularResturantList extends StatelessWidget {
   const MostPopularResturantList({super.key});

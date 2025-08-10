@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/food_type_card/food_card_type_image.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/food_type_card/food_card_type_text.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/food_type_card/food_card_type_image.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/food_type_card/food_card_type_text.dart';
 
 class FoodTypeCard extends StatelessWidget {
   final String imagePath;

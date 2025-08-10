@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/src/models/food_tpye_model.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/food_type_card/food_type_card.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/food_type_card/food_type_card.dart';
 
 class FoodTypeList extends StatelessWidget {
   const FoodTypeList({super.key});

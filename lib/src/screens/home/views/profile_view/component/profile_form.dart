@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/core/consts/strings/strings.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_button.dart';
 
 import 'custom_text_form_field.dart';
 class ProfileForm extends StatefulWidget {
@@ -18,7 +19,17 @@ class _ProfileFormState extends State<ProfileForm> {
   final _addressController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-
+@override
+  void dispose() {
+  _nameController.dispose();
+  _passwordController.dispose();
+  _confirmPasswordController.dispose();
+  _emailController.dispose();
+  _phonenumbereController.dispose();
+  _addressController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -95,14 +106,11 @@ class _ProfileFormState extends State<ProfileForm> {
         keyboardType: TextInputType.visiblePassword,
         onChanged: (value){},),
 
-            SizedBox(
-              width: double.infinity,
-
-              child: ElevatedButton(onPressed: (){},
-                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColor.orange)),
-
-
-                      child: Text('Save'))),
+        CustomButton(title: 'Save',onPressed: (){
+       if(   _formKey.currentState!.validate()){
+         _formKey.currentState!.validate();
+       }
+        },),
 
           ],
         )

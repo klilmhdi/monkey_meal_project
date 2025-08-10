@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_button.dart';
 import 'package:monkey_meal_project/src/screens/home/views/profile_view/component/profile_form.dart';
 
 
@@ -48,7 +49,8 @@ class _ProfileViewState extends State<ProfileView> {
             Text('Hi there Emilia!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 30),
             // Name Field
-            ProfileForm()
+            ProfileForm(),
+
             ],
         ),
       ),

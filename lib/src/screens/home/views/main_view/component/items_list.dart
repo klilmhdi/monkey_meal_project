@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/item_list_tile/item_list_tile.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/item_list_tile/item_list_tile.dart';
 
 class ItemsList extends StatelessWidget {
   const ItemsList({super.key});

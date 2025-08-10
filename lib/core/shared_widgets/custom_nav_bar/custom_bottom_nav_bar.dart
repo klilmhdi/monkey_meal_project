@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 import 'package:monkey_meal_project/src/helper/helper.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({

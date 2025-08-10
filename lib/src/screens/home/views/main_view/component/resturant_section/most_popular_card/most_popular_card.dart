@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/resturant_card/resturant_data_text.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/resturant_card/resturant_name.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/resturant_card/resturant_rate_icon.dart';
-import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/main_view/resturant_section/resturant_card/resturant_rate_text.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/resturant_section/resturant_card/resturant_data_text.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/resturant_section/resturant_card/resturant_name.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/resturant_section/resturant_card/resturant_rate_icon.dart';
+import 'package:monkey_meal_project/src/screens/home/views/main_view/component/resturant_section/resturant_card/resturant_rate_text.dart';
 
 class MostPopularCard extends StatelessWidget {
   const MostPopularCard({Key? key}) : super(key: key);
