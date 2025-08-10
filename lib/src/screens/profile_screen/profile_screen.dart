@@ -68,7 +68,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(currentIndex: 3, onTap: (index){}),
     );
   }
 }

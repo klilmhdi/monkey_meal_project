@@ -9,6 +9,7 @@ import 'package:monkey_meal_project/src/screens/sign_in/log_in_screen.dart';
 import 'package:monkey_meal_project/src/screens/sign_up/sign_up_screen.dart';
 import 'package:monkey_meal_project/src/screens/splash/landing_screen.dart';
 import 'package:monkey_meal_project/src/screens/splash/splash_screen.dart';
+import 'package:monkey_meal_project/src/widgets/home_widgets/home_views/home_view.dart';
 
 // // We use name route
 // // All our routes will be available here
@@ -26,6 +27,7 @@ final Map<String, WidgetBuilder> routes = {
   SendOTPScreen.routeName: (context) =>  SendOTPScreen(),
   FirstIntroScreen.routeName: (context) =>  FirstIntroScreen(),
   HomeScreen.routeName: (context) =>  HomeScreen(),
+  HomeView.routeName: (context) =>  HomeView(),
 // ProfileScreen.routeName:(context)=>ProfileScreen()
 
 
