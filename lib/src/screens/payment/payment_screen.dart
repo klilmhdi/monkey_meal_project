@@ -16,12 +16,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Payment Details'),
-      actions: [InkWell(
-        onTap: (){},
-        child:     IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          onPressed: () {},
-        ),
+      actions: [IconButton(
+        icon: const Icon(Icons.shopping_cart),
+        onPressed: () {},
       )],),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

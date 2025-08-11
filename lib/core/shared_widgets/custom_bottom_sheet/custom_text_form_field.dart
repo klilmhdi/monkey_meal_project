@@ -8,10 +8,12 @@ class CustomTextFormField extends StatelessWidget {
  final String? Function(String?)? validator;
  final void Function(String)? onChanged;
  final void Function(String?)? onSaved;
+ final int? maxLength;
   CustomTextFormField({super.key,
     this.keyboardType,this.validator,
     this.onChanged,this.onSaved,
-     this.obscureText = false, required this.hint});
+
+     this.obscureText = false, required this.hint, this.maxLength});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,10 @@ class CustomTextFormField extends StatelessWidget {
       child: TextFormField(
         keyboardType: keyboardType,
         validator:validator ,
+        maxLength: maxLength,
         onChanged: onChanged,
         onSaved: onSaved,
+        textInputAction: TextInputAction.continueAction,
         decoration: InputDecoration(
           hintText: this.hint,
           contentPadding: EdgeInsets.all(10),

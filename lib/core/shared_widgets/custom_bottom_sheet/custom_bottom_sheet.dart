@@ -38,10 +38,15 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
             children: [
               Text('Expiry',style: TextStyle(fontFamily: 'Metropolis',fontWeight: FontWeight.w700),),
               SizedBox(width: 16,),
-              Expanded(child: CustomTextFormField(hint: 'MM',keyboardType: TextInputType.number,))
+              Expanded(child: CustomTextFormField(hint: 'MM',
+                maxLength: 2,
+                keyboardType: TextInputType.number,))
 
              , const SizedBox(width: 10),
-              Expanded(child: CustomTextFormField(hint: 'YY',keyboardType: TextInputType.number,))
+              Expanded(child: CustomTextFormField(hint: 'YY',
+                maxLength: 2,
+
+                keyboardType: TextInputType.number,))
             ],
           ),
           const SizedBox(height: 10),
@@ -71,8 +76,8 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
             ],
           ),
           const SizedBox(height: 20),
-          CustomButton(title: '+ \t Add Card',onPressed:widget.onPressed ,)
-
+          CustomButton(title: '+ \t Add Card',onPressed:widget.onPressed ,),
+SizedBox(height: 16,)
         ],
       ),
     );  }

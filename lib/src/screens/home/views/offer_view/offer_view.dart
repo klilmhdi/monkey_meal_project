@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/src/models/offer_item_model.dart';
 import 'package:monkey_meal_project/src/screens/home/views/offer_view/component/list_view_offers.dart';
+import 'package:monkey_meal_project/src/screens/payment/payment_screen.dart';
 
 import 'component/offer_card.dart';
 
@@ -16,7 +17,10 @@ class OfferView extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, PaymentScreen.routeName);
+
+            },
           ),
         ],
         backgroundColor: Colors.white,

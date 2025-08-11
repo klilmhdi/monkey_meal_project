@@ -30,9 +30,12 @@ class _OrderScreenState extends State<OrderScreen> {
               OrderSummary(),
 
 SizedBox(height: 30,),
-              CustomButton(title: 'Checkout',onPressed: (){
-                Navigator.pushNamed(context, CheckoutScreen.routeName);
-              },),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: CustomButton(title: 'Checkout',onPressed: (){
+                  Navigator.pushNamed(context, CheckoutScreen.routeName);
+                },),
+              ),
             ],
           ),
         );  }

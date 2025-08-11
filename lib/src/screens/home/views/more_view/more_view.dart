@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/consts/colors/colors.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:monkey_meal_project/src/screens/about_screen/about_screen.dart';
 import 'package:monkey_meal_project/src/screens/inbox_screen/inbox_screen.dart';
 import 'package:monkey_meal_project/src/screens/notifications_screen/notification_screen.dart';
 import 'package:monkey_meal_project/src/screens/orders_screen/order_screen.dart';
@@ -11,22 +14,15 @@ class MoreView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'More',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart),
-            onPressed: () {},
-          ),
-        ],
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
-      ),
+      appBar: AppBar(title: Text('More'),
+        actions: [IconButton(
+          icon: const Icon(Icons.shopping_cart),
+          onPressed: () {
+            Navigator.pushNamed(context, PaymentScreen.routeName);
+          },
+        )],),
       body: ListView(
+
         padding: const EdgeInsets.all(16.0),
         children:  [
           MoreItem(
@@ -59,6 +55,8 @@ onTap:(){
           MoreItem(
             icon: Icons.info,
             title: 'About Us',
+              onTap:(){
+                Navigator.pushNamed(context,AboutScreen.routeName);}
           ),
         ],
       ),

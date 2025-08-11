@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:monkey_meal_project/routes.dart';
+import 'package:monkey_meal_project/src/helper/firebase_helper.dart';
+import 'package:monkey_meal_project/src/manage/auth_cubit/login_cubit/login_cubit.dart';
+import 'package:monkey_meal_project/src/manage/auth_cubit/signup_cubit/signup_cubit.dart';
+import 'package:monkey_meal_project/src/screens/food_details/detailes_item.dart';
 import 'package:monkey_meal_project/src/screens/home/home_screen.dart';
 import 'package:monkey_meal_project/src/screens/splash/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,16 +22,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      /* home: Scaffold(
-        body: Center(
-          child:SplashScreen(),
-
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => SignupCubit(FirebaseServices())),
+      ],
+      child: ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder:
+            (_, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(fontFamily: 'Metropolis'),
+          home: SplashScreen(),
+          // initialRoute: SplashScreen.routeName,
+          // initialRoute: SplashScreen.routeName,
+          // routes: routes,
         ),
-      ),*/
-      initialRoute: HomeScreen.routeName,
-      routes: routes,
+      ),
     );
   }
 }

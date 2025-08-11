@@ -105,7 +105,7 @@ class _ProfileFormState extends State<ProfileForm> {
             },controller: _confirmPasswordController,
         keyboardType: TextInputType.visiblePassword,
         onChanged: (value){},),
-
+SizedBox(height: 8,),
         CustomButton(title: 'Save',onPressed: (){
        if(   _formKey.currentState!.validate()){
          _formKey.currentState!.validate();

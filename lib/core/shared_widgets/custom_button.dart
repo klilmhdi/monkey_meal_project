@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
     style: ElevatedButton.styleFrom(
     backgroundColor: AppColor.orange, // Vibrant orange color
     shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10.0), // Smooth rounded corners
+    borderRadius: BorderRadius.circular(24.0), // Smooth rounded corners
     ),
     textStyle: const TextStyle(
     fontWeight: FontWeight.bold, // Clear and bold text

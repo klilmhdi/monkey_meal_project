@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
+import 'package:monkey_meal_project/src/screens/about_screen/about_screen.dart';
 import 'package:monkey_meal_project/src/screens/change_address_screen/change_address_screen.dart';
 import 'package:monkey_meal_project/src/screens/checkout_screen/checkout_screen.dart';
+import 'package:monkey_meal_project/src/screens/food_details/detailes_item.dart';
 import 'package:monkey_meal_project/src/screens/forgot_password/forgot_password.dart';
 import 'package:monkey_meal_project/src/screens/forgot_password/new_password_screen.dart';
 import 'package:monkey_meal_project/src/screens/forgot_password/send_otp_screen.dart';
@@ -32,6 +34,7 @@ final Map<String, WidgetBuilder> routes = {
   PaymentScreen.routeName: (context) =>  PaymentScreen(),
   OrderScreen.routeName: (context) =>  OrderScreen(),
 CheckoutScreen.routeName:(context)=>CheckoutScreen(),
-ChangeAddressScreen.routeName:(context)=>ChangeAddressScreen()
-
+ChangeAddressScreen.routeName:(context)=>ChangeAddressScreen(),
+  AboutScreen.routeName:(context)=>AboutScreen(),
+  TandooriChickenPizzaPage.routeName:(context)=>TandooriChickenPizzaPage()
 };

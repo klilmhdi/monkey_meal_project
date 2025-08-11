@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_button.dart';
 import 'package:monkey_meal_project/src/screens/home/views/profile_view/component/profile_form.dart';
+import 'package:monkey_meal_project/src/screens/payment/payment_screen.dart';
 
 
 class ProfileView extends StatefulWidget {
@@ -18,7 +19,11 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Profile'), actions: [IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {})]),
+      appBar: AppBar(title: Text('Profile'), actions: [IconButton(icon: Icon(Icons.shopping_cart),
+          onPressed: () {
+            Navigator.pushNamed(context, PaymentScreen.routeName);
+
+          })]),
       body:
       SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -27,12 +32,7 @@ class _ProfileViewState extends State<ProfileView> {
             // Profile Picture
             CircleAvatar(
               radius: 60,
-              child: CachedNetworkImage(
-                imageUrl: "http://via.placeholder.com/350x150",
-                progressIndicatorBuilder:
-                    (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
+              child:Image.asset('assets/images/person.png',height: 100,)
             ),
             SizedBox(height: 10),
             // Edit Profile Button
