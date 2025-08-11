@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_button.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:monkey_meal_project/src/helper/helper.dart';
 import 'package:monkey_meal_project/src/models/order_model.dart';
 import 'package:monkey_meal_project/src/screens/checkout_screen/checkout_screen.dart';
@@ -37,13 +38,14 @@ class _OrderScreenState extends State<OrderScreen> {
 
 SizedBox(height: 30,),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: CustomButton(title: 'Checkout',onPressed: (){
                  // Helper.navTo(context, CheckoutScreen());
                   Navigator.pushNamed(context,CheckoutScreen.routeName
                   );
                   },),
               ),
+              SizedBox(height: 50,)
             ],
           ),
         );  }

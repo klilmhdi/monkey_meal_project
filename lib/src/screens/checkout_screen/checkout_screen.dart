@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_button.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:monkey_meal_project/core/shared_widgets/summary_row_widget.dart';
 import 'package:monkey_meal_project/src/helper/helper.dart';
 import 'package:monkey_meal_project/src/screens/change_address_screen/change_address_screen.dart';
+import 'package:monkey_meal_project/src/screens/checkout_screen/component/order_success_bottom_sheet.dart';
 import 'package:monkey_meal_project/src/screens/checkout_screen/component/payment_method_item.dart';
 class CheckoutScreen extends StatelessWidget {
   static String routeName = '/checkoutRoute';
@@ -55,9 +57,14 @@ class CheckoutScreen extends StatelessWidget {
                       Text('Brooklyn, NY 11216'),
                     ],
                   ),
-                  Text(
-                    'Change',
-                    style: TextStyle(color: Colors.orange),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, ChangeAddressScreen.routeName);
+                    },
+                    child: Text(
+                      'Change',
+                      style: TextStyle(color: Colors.orange),
+                    ),
                   ),
                 ],
               ),
@@ -70,15 +77,33 @@ class CheckoutScreen extends StatelessWidget {
                     'Payment method',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.add, color: Colors.orange),
-                      SizedBox(width: 4),
-                      Text(
-                        'Add Card',
-                        style: TextStyle(color: Colors.orange),
-                      ),
-                    ],
+                  InkWell(
+                    onTap: (){
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true, // so it can expand when keyboard opens
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
+                        ),
+                        builder: (_) =>  CustomBottomSheet(
+                          onPressed:() {
+                            // Helper.navTo(context, ChangeAddressScreen());
+
+Navigator.pop(context);
+                          },
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.add, color: Colors.orange),
+                        SizedBox(width: 4),
+                        Text(
+                          'Add Card',
+                          style: TextStyle(color: Colors.orange),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -110,15 +135,13 @@ CustomButton(title: 'Send order',onPressed: (){
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
     ),
-    builder: (_) =>  CustomBottomSheet(
-      onPressed:() {
-       // Helper.navTo(context, ChangeAddressScreen());
-        Navigator.popAndPushNamed(context, ChangeAddressScreen.routeName);
+    builder: (_) =>  OrderSuccessBottomSheet()
+  );
+ },)
+             , SizedBox(height: 16,)
 
-        },
-    ),
-  );},)
             ],
+
           ),
         ),
       ),

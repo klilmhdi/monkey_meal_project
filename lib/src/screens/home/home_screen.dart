@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:monkey_meal_project/src/screens/home/component/custom_navigation_item.dart';
 import 'package:monkey_meal_project/src/screens/home/views/main_view/main_view.dart';
 import 'package:monkey_meal_project/src/screens/home/views/menu_view.dart';

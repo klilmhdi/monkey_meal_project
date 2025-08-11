@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:monkey_meal_project/src/screens/payment/payment_screen.dart';
 class NotificationScreen extends StatefulWidget {
   static String routeName='/notificationRoute';
