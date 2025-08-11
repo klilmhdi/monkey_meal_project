@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:monkey_meal_project/core/consts/colors/colors.dart';
+import 'package:monkey_meal_project/core/consts/functions/animations.dart';
+import 'package:monkey_meal_project/core/helper/firebase_helper.dart';
+import 'package:monkey_meal_project/core/helper/helper.dart';
+import 'package:monkey_meal_project/src/screens/sign_in/log_in_screen.dart';
 
-import '../../helper/firebase_helper.dart';
-import '../../helper/helper.dart';
 import '../../manage/auth_cubit/signup_cubit/signup_cubit.dart';
-import 'component/sign_up_form.dart';
+import 'sign_up_form.dart';
 
 class SignUpScreen extends StatelessWidget {
   static const String routeName = '/sign_up';
@@ -28,17 +31,16 @@ class SignUpScreen extends StatelessWidget {
                     builder: (_) => const Center(child: CircularProgressIndicator()),
                   );
                 } else if (state is SignupSuccess) {
-                  Navigator.pop(context); // Close loading dialog
-                  // Navigate to home screen or show success message
+                  Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signup successful!')));
                 } else if (state is SignupError) {
-                  Navigator.pop(context); // Close loading dialog
+                  Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
                 }
               },
               child: Column(
                 children: [
-                  SizedBox(height: Helper.getScreenHeight(context) * 0.05),
+                  SizedBox(height: context.getScreenHeight * 0.05),
                   Text(
                     'Sign Up',
                     style: Theme.of(
@@ -50,13 +52,20 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: 40),
                   const SignUpForm(),
                   const SizedBox(height: 20),
-                  TextButton(
-                    onPressed: () {
-                      // Navigate to login screen
-                    },
-                    child: const Text(
-                      'Already have an account? Sign In',
-                      style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have an account?",
+                          style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                        ),
+                        TextButton(
+                          onPressed: () => NavAndAnimationsFunctions.navToWithRTLAnimation(context, LoginScreen()),
+                          child: Text("Sign In", style: TextStyle(color: AppColor.orange)),
+                        ),
+                      ],
                     ),
                   ),
                 ],

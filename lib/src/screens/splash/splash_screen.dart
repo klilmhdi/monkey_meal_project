@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/consts/functions/animations.dart';
+import 'package:monkey_meal_project/core/helper/helper.dart';
+import 'package:monkey_meal_project/src/screens/home/home_screen.dart';
 
-import '../../helper/helper.dart';
 import 'landing_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final bool isLoggedIn;
+
+  const SplashScreen({super.key, required this.isLoggedIn});
 
   static String routeName = "/splash";
 
@@ -24,7 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _timer = Timer(const Duration(seconds: 4), () {
         if (mounted) {
-          Helper.navAndFinish(context, const LandingScreen());
+          if (widget.isLoggedIn) {
+            NavAndAnimationsFunctions.navAndFinish(context, const HomeScreen());
+          } else {
+            NavAndAnimationsFunctions.navAndFinish(context, const LandingScreen());
+          }
         }
       });
     });
@@ -32,7 +40,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
-    // إلغاء المؤقت في حال تم الخروج من الشاشة قبل انتهاء الوقت
     _timer?.cancel();
     super.dispose();
   }
@@ -41,11 +48,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox(
-        width: Helper.getScreenWidth(context),
-        height: Helper.getScreenHeight(context),
+        width: context.getScreenWidth,
+        height: context.getScreenHeight,
         child: Stack(
           children: [
-            Align(alignment: Alignment.center, child: Image.asset('assets/images/MealMonkeyLogo.png')),
+            Align(alignment: Alignment.center, child: Image.asset('assets/images/bg.png')),
+            // Align(alignment: Alignment.center, child: Image.asset('assets/images/MealMonkeyLogo.png')),
             const Positioned(left: 0, right: 0, bottom: 20, child: Center(child: CircularProgressIndicator())),
           ],
         ),

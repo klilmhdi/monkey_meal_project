@@ -1,88 +1,135 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
-import 'package:monkey_meal_project/src/screens/home/component/custom_navigation_item.dart';
-import 'package:monkey_meal_project/src/screens/home/views/main_view/main_view.dart';
-import 'package:monkey_meal_project/src/screens/home/views/menu_view.dart';
-import 'package:monkey_meal_project/src/screens/home/views/more_view/more_view.dart';
-import 'package:monkey_meal_project/src/screens/home/views/offer_view/offer_view.dart';
-import 'package:monkey_meal_project/src/screens/home/views/profile_view/profile_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:monkey_meal_project/core/consts/functions/animations.dart';
+import 'package:monkey_meal_project/core/helper/firebase_helper.dart';
+import 'package:monkey_meal_project/src/screens/food/food_screen.dart';
+import 'package:monkey_meal_project/src/screens/payment/payment_screen.dart';
+import 'package:monkey_meal_project/src/widgets/custom_button/build_custom_button.dart';
+import 'package:monkey_meal_project/src/widgets/custom_form_field/build_text_form_field_widget.dart';
 
-
-
+import '../../manage/edit_user_data_cubit/edit_user_data_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";
 
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-class _HomeScreenState extends State<HomeScreen>{
-  List<Widget> screen_options=[MenuView(),    OfferView(),
 
-    MainView(),
+class _HomeScreenState extends State<HomeScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final addressController = TextEditingController();
 
-    ProfileView(),MoreView()];
-  int _selectedIndex =0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      print(_selectedIndex);
-    });
-  }
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return BlocProvider(
+      create: (_) => EditUserDataCubit()..loadUserData(),
+      child: BlocConsumer<EditUserDataCubit, EditUserDataState>(
+        listener: (context, state) {
+          if (state is SuccessGetUserDataFromFirebaseState) {
+            nameController.text = state.name;
+            emailController.text = state.email;
+            phoneController.text = state.phone;
+            addressController.text = state.address;
+          }
+          if (state is EditUserSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("User updated successfully ✅")));
+          } else if (state is EditUserError) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: ${state.message}")));
+          }
+        },
+        builder: (context, state) {
+          final cubit = context.read<EditUserDataCubit>();
 
-      bottom: false,
-      child:   Scaffold(
-    /*    floatingActionButton: FloatingActionButton(
-          onPressed: () => _onItemTapped(2),
-          // Home button, always navigates to index 2
-          backgroundColor: Colors.white,
-          child: const Icon(Icons.home, color: Colors.black54),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
-        bottomNavigationBar:
-        CustomBottomNavBar(onTap:(index){
-          _onItemTapped(index);
-        },currentIndex: 0,),
-
-        /* BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          // Creates the curved notch for the FAB
-          notchMargin: 8.0,
-          height: 90,
-          // Space between the FAB and the bottom app bar
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              CustomNavigationItem(icon: Icons.grid_view,
-                  onTap: () => _onItemTapped(0),
-                  label: 'Menu', index: 0),
-              CustomNavigationItem(icon: Icons.shopping_bag,
-                  onTap: () => _onItemTapped(1),
-                  label: 'Offers', index: 1),
-              // The middle is empty to make space for the FAB
-              const SizedBox(width: 48),
-              CustomNavigationItem(icon: Icons.person,
-                  onTap: () => _onItemTapped(3),
-                  label: 'Profile',
-                  index: 3,
-                  isHighlighted: true), // Profile is highlighted
-              CustomNavigationItem(icon: Icons.more_horiz,
-                  onTap: () => _onItemTapped(4),
-                  label: 'More', index: 4),
-            ],
-          ),
-        ),*/
-        body: screen_options[_selectedIndex]
-        ,),
+          return Scaffold(
+            appBar: AppBar(title: const Text("Edit User")),
+            body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  children: [
+                    GestureDetector(
+                      onTap: () => cubit.pickImage(),
+                      child: CircleAvatar(
+                        radius: 100,
+                        backgroundColor: Colors.grey[200],
+                        child:
+                            cubit.profileImage != null
+                                ? ClipOval(
+                                  child: Image.file(cubit.profileImage!, width: 200, height: 200, fit: BoxFit.cover),
+                                )
+                                : (state is SuccessGetUserDataFromFirebaseState &&
+                                        state.image != null &&
+                                        state.image!.isNotEmpty
+                                    ? (state.image!.startsWith('http')
+                                        ? ClipOval(
+                                          child: CachedNetworkImage(
+                                            imageUrl: state.image!,
+                                            width: 200,
+                                            height: 200,
+                                            fit: BoxFit.cover,
+                                            placeholder: (context, url) => const CircularProgressIndicator(),
+                                            errorWidget: (context, url, error) => const Icon(Icons.error),
+                                          ),
+                                        )
+                                        : ClipOval(
+                                          child: Image.file(
+                                            File(state.image!),
+                                            width: 200,
+                                            height: 200,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ))
+                                    : const Icon(Icons.camera_alt, size: 40)),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Column(
+                      spacing: 15,
+                      children: [
+                        customTextField(controller: nameController, hintText: "Enter your full name"),
+                        customTextField(controller: emailController, hintText: "Enter your email"),
+                        customTextField(controller: phoneController, hintText: "Enter your phone number"),
+                        customTextField(controller: addressController, hintText: "Enter your current address"),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    state is EditUserLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : customButton(
+                          press: () {
+                            if (_formKey.currentState!.validate()) {
+                              cubit.updateUserData(
+                                userId: FirebaseServices().currentUserId.toString(),
+                                name: nameController.text,
+                                email: emailController.text,
+                                phone: phoneController.text.isEmpty ? null : phoneController.text,
+                                address: addressController.text.isEmpty ? null : addressController.text,
+                              );
+                            }
+                          },
+                          title: "Update",
+                        ),
+                    const SizedBox(height: 20),
+                    customButton(press: () => NavAndAnimationsFunctions.navTo(context, FoodListScreen()), title: "Foods"),
+                    const SizedBox(height: 20),
+                    customButton(press: () => NavAndAnimationsFunctions.navTo(context, PaymentListScreen()), title: "Payments")
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
-  }}
-
-
-
-
-
-
-
+  }
+}

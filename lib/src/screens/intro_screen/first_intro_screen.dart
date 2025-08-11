@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/helper/helper.dart';
 
 import '../../../core/consts/colors/colors.dart'; // Assurez-vous que le chemin est correct
-import '../../helper/helper.dart'; // Assurez-vous que le chemin est correct
 import '../home/home_screen.dart'; // Assurez-vous que le chemin est correct et que HomeScreen a un routeName défini
 
 class FirstIntroScreen extends StatefulWidget {
@@ -23,19 +23,13 @@ class _IntroScreenState extends State<FirstIntroScreen> {
       // Correction des noms d'images pour correspondre aux assets réels (selon l'erreur précédente)
       "image": "first.png",
       "title": "Find Food You Love",
-      "desc":
-      "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep"
+      "desc": "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep",
     },
-    {
-      "image": "sec.png",
-      "title": "Fast Delivery",
-      "desc": "Fast food delivery to your home, office wherever you are"
-    },
+    {"image": "sec.png", "title": "Fast Delivery", "desc": "Fast food delivery to your home, office wherever you are"},
     {
       "image": "third.png",
       "title": "Live Tracking",
-      "desc":
-      "Real time tracking of your food on the app once you placed the order"
+      "desc": "Real time tracking of your food on the app once you placed the order",
     },
   ];
 
@@ -56,8 +50,8 @@ class _IntroScreenState extends State<FirstIntroScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: Helper.getScreenWidth(context),
-        height: Helper.getScreenHeight(context),
+        width: context.getScreenWidth,
+        height: context.getScreenHeight,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -91,8 +85,7 @@ class _IntroScreenState extends State<FirstIntroScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 2.5),
                       child: CircleAvatar(
                         radius: 5,
-                        backgroundColor:
-                        count == index ? AppColor.orange : AppColor.placeholder,
+                        backgroundColor: count == index ? AppColor.orange : AppColor.placeholder,
                       ),
                     );
                   }),
@@ -133,8 +126,7 @@ class _IntroScreenState extends State<FirstIntroScreen> {
                         );
                       } else {
                         // Si c'est la dernière page, navigue vers l'écran d'accueil
-                        Navigator.of(context)
-                            .pushReplacementNamed(HomeScreen.routeName);
+                        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -149,7 +141,7 @@ class _IntroScreenState extends State<FirstIntroScreen> {
                     ),
                   ),
                 ),
-                Spacer() // Espace flexible en bas
+                Spacer(), // Espace flexible en bas
               ],
             ),
           ),

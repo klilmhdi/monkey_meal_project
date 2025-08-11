@@ -2,9 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:monkey_meal_project/core/shared_widgets/build_custom_snackbar_widget.dart';
-
-import '../../../helper/firebase_helper.dart';
+import 'package:monkey_meal_project/core/consts/functions/animations.dart';
+import 'package:monkey_meal_project/core/helper/firebase_helper.dart';
+import 'package:monkey_meal_project/core/shared_preferenced/shared_preferenced.dart';
+import 'package:monkey_meal_project/src/screens/home/home_screen.dart';
+import 'package:monkey_meal_project/src/screens/splash/landing_screen.dart';
+import 'package:monkey_meal_project/src/widgets/custom_snackbar/build_custom_snackbar_widget.dart';
 
 part 'login_state.dart';
 
@@ -20,12 +23,13 @@ class LoginCubit extends Cubit<LoginState> {
   }) async {
     emit(LoadingLoginState());
     try {
-      await FirebaseServices().signUpWithEmail(emailController.text.trim(), passwordController.text.trim()).then((
-        user,
-      ) {
-        // navAndFinish(context, Layout());
-        emit(SuccessLoginState(user as User));
-      });
+      final user = await FirebaseServices().signInWithEmail(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+      );
+      SharedPrefController().isLoggedIn = true;
+      emit(SuccessLoginState(user));
+      NavAndAnimationsFunctions.navAndFinish(context, const HomeScreen());
     } on FirebaseAuthException catch (firebaseMessage) {
       switch (firebaseMessage.code) {
         case 'user-not-found':
@@ -62,6 +66,17 @@ class LoginCubit extends Cubit<LoginState> {
     } catch (e) {
       showErrorSnackBar("Login Failed!! ${e.toString()}", 3, context);
       emit(FailedLoginState("Login Failed!!$e"));
+    }
+  }
+
+  Future<void> logout(context) async {
+    try {
+      await FirebaseServices().signOut();
+      SharedPrefController().isLoggedIn = false;
+      await SharedPrefController().clear();
+      NavAndAnimationsFunctions.navAndFinish(context, const LandingScreen());
+    } catch (e) {
+      debugPrint('Logout error: $e');
     }
   }
 }

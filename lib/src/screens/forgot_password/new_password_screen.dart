@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/helper/helper.dart';
 
 import '../../../core/consts/colors/colors.dart';
-import '../../helper/helper.dart';
 import '../intro_screen/first_intro_screen.dart';
 
 class NewPwScreen extends StatelessWidget {
@@ -15,8 +15,8 @@ class NewPwScreen extends StatelessWidget {
     final confirmPasswordController = TextEditingController();
     return Scaffold(
       body: Container(
-        width: Helper.getScreenWidth(context),
-        height: Helper.getScreenHeight(context),
+        width: context.getScreenWidth,
+        height: context.getScreenHeight,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),

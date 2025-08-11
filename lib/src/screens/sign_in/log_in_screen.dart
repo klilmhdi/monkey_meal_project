@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:monkey_meal_project/core/consts/functions/animations.dart';
+import 'package:monkey_meal_project/core/helper/helper.dart';
+import 'package:monkey_meal_project/src/manage/auth_cubit/signup_cubit/signup_cubit.dart';
+import 'package:monkey_meal_project/src/screens/home/home_screen.dart';
+import 'package:monkey_meal_project/src/widgets/custom_snackbar/build_custom_snackbar_widget.dart';
 
 import '../../../core/consts/colors/colors.dart';
-import '../../helper/helper.dart';
-import '../sign_up/sign_up_screen.dart';
-import 'component/SignForm.dart';
+import 'log_in_form.dart';
 
 class LoginScreen extends StatelessWidget {
   static String routeName = "/sign_in";
@@ -15,15 +19,15 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
-          height: Helper.getScreenHeight(context),
-          width: Helper.getScreenWidth(context),
+          height: context.getScreenHeight,
+          width: context.getScreenWidth,
           child: SafeArea(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: Helper.getScreenHeight(context) * 0.05),
+                  SizedBox(height: context.getScreenHeight * 0.05),
                   Text(
                     "Login",
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -36,21 +40,19 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   const Text(
                     'Add your details to login',
-                    style: TextStyle(fontSize: 16, fontFamily: 'assets/fonts/Metropolis-Medium.ttf', color: Colors.grey),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'assets/fonts/Metropolis-Medium.ttf',
+                      color: Colors.grey,
+                    ),
                   ),
                   const Spacer(),
 
                   // Formulaire de connexion
-                  const SignForm(),
+                  const LoginForm(),
 
                   const Spacer(flex: 2),
-                  const Text(
-                    "or Login With",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  const Text("or Login With", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
                   const Spacer(),
 
                   SizedBox(
@@ -76,37 +78,51 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const Spacer(),
 
-                  SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ButtonStyle(backgroundColor: WidgetStateProperty.all(const Color(0xFFDD4B39))),
-                      onPressed: () {
-                        // Logique pour la connexion avec Google
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset('assets/images/google.png', height: 24, width: 24),
-                          const SizedBox(width: 30),
-                          const Text(
-                            "Login with Google",
-                            style: TextStyle(color: Colors.white, fontFamily: 'assets/fonts/Metropolis-Medium.ttf'),
-                          ),
-                        ],
+                  BlocListener<SignupCubit, SignupState>(
+                    listener: (context, state) {
+                      if (state is SignupSuccess) {
+                        NavAndAnimationsFunctions.navAndFinish(context, HomeScreen());
+                      } else if (state is SignupError) {
+                        showErrorSnackBar("Error, Try again", 2, context);
+                      }
+                    },
+                    child: SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(backgroundColor: WidgetStateProperty.all(const Color(0xFFDD4B39))),
+                        onPressed: () {
+                          context.read<SignupCubit>().signInWithGoogle();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/images/google.png', height: 24, width: 24),
+                            const SizedBox(width: 30),
+                            const Text(
+                              "Login with Google",
+                              style: TextStyle(color: Colors.white, fontFamily: 'assets/fonts/Metropolis-Medium.ttf'),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
+
                   const Spacer(flex: 3),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushReplacementNamed(SignUpScreen.routeName);
-                    },
-                    child: const Row(
+                  Center(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Don't have an Account?", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
-                        Text("Sign Up", style: TextStyle(color: AppColor.orange, fontWeight: FontWeight.bold)),
+                        Text(
+                          "Don't have an Account?",
+                          style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                        ),
+                        TextButton(
+                          onPressed: () => NavAndAnimationsFunctions.navToWithRTLAnimation(context, LoginScreen()),
+                          child: Text("Sign Up", style: TextStyle(color: AppColor.orange)),
+                        ),
                       ],
                     ),
                   ),

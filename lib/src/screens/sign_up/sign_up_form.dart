@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
-import 'package:monkey_meal_project/src/helper/helper.dart';
+import 'package:monkey_meal_project/core/consts/functions/animations.dart';
 import 'package:monkey_meal_project/src/screens/home/home_screen.dart';
+import 'package:monkey_meal_project/src/widgets/custom_form_field/build_text_form_field_widget.dart';
 
-import '../../../../core/consts/validator/validation.dart';
-import '../../../manage/auth_cubit/signup_cubit/signup_cubit.dart';
+import '../../../core/consts/validator/validation.dart';
+import '../../manage/auth_cubit/signup_cubit/signup_cubit.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -44,47 +45,51 @@ class _SignUpFormState extends State<SignUpForm> {
           key: _formKey,
           child: Column(
             children: [
-              _buildTextField(
+              customTextField(
                 controller: _nameController,
                 hintText: 'Name',
                 validator: (value) => ValidationUtils.validateName(value),
               ),
               const SizedBox(height: 20),
-              _buildTextField(
+              customTextField(
                 controller: _emailController,
                 hintText: 'Email',
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) => ValidationUtils.validateEmail(value),
               ),
               const SizedBox(height: 20),
-              _buildTextField(
+              customTextField(
                 controller: _phoneController,
                 hintText: 'Phone Number',
                 keyboardType: TextInputType.phone,
                 validator: (value) => ValidationUtils.validatePhone(value),
               ),
               const SizedBox(height: 20),
-              _buildTextField(
+              customTextField(
                 controller: _addressController,
                 hintText: 'Address',
                 validator: (value) => ValidationUtils.validateAddress(value),
               ),
               const SizedBox(height: 20),
-              _buildTextField(
+              customTextField(
                 controller: _passwordController,
                 hintText: 'Password',
                 obscureText: !cubit.isPasswordVisible,
-                suffixIcon: IconButton(
+                suffixWidget: IconButton(
                   icon: Icon(cubit.isPasswordVisible ? Icons.visibility : Icons.visibility_off, color: AppColor.orange),
                   onPressed: cubit.togglePasswordVisibility,
                 ),
                 validator: (value) => ValidationUtils.validatePassword(value),
               ),
               const SizedBox(height: 20),
-              _buildTextField(
+              customTextField(
                 controller: _confirmPasswordController,
                 hintText: 'Confirm Password',
                 obscureText: !cubit.isPasswordVisible,
+                suffixWidget: IconButton(
+                  icon: Icon(cubit.isPasswordVisible ? Icons.visibility : Icons.visibility_off, color: AppColor.orange),
+                  onPressed: cubit.togglePasswordVisibility,
+                ),
                 validator: (value) => ValidationUtils.validateConfirmPassword(value, _passwordController.text),
               ),
               const SizedBox(height: 30),
@@ -107,29 +112,29 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String hintText,
-    TextInputType? keyboardType,
-    bool obscureText = false,
-    Widget? suffixIcon,
-    String? Function(String?)? validator,
-  }) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        hintText: hintText,
-        filled: true,
-        fillColor: const Color(0xFFe5e5e5),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
-        suffixIcon: suffixIcon,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-      ),
-      validator: validator,
-    );
-  }
+  // Widget _buildTextField({
+  //   required TextEditingController controller,
+  //   required String hintText,
+  //   TextInputType? keyboardType,
+  //   bool obscureText = false,
+  //   Widget? suffixIcon,
+  //   String? Function(String?)? validator,
+  // }) {
+  //   return TextFormField(
+  //     controller: controller,
+  //     keyboardType: keyboardType,
+  //     obscureText: obscureText,
+  //     decoration: InputDecoration(
+  //       hintText: hintText,
+  //       filled: true,
+  //       fillColor: const Color(0xFFe5e5e5),
+  //       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
+  //       suffixIcon: suffixIcon,
+  //       contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+  //     ),
+  //     validator: validator,
+  //   );
+  // }
 
   void _submitForm(SignupCubit cubit) {
     if (_formKey.currentState!.validate()) {
@@ -141,7 +146,7 @@ class _SignUpFormState extends State<SignUpForm> {
             phone: _phoneController.text.trim(),
             address: _addressController.text.trim(),
           )
-          .then((_) => Helper.navAndFinish(context, HomeScreen()));
+          .then((_) => NavAndAnimationsFunctions.navAndFinish(context, HomeScreen()));
     }
   }
 }

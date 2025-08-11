@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/consts/functions/animations.dart';
+import 'package:monkey_meal_project/core/helper/helper.dart';
 import 'package:monkey_meal_project/src/screens/sign_up/sign_up_screen.dart';
+import 'package:monkey_meal_project/src/widgets/custom_button/build_custom_button.dart';
 
 import '../../../core/consts/colors/colors.dart';
-import '../../helper/helper.dart';
 import '../sign_in/log_in_screen.dart';
 
 class LandingScreen extends StatelessWidget {
@@ -14,8 +16,8 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox(
-        width: Helper.getScreenWidth(context),
-        height: Helper.getScreenHeight(context),
+        width: context.getScreenWidth,
+        height: context.getScreenHeight,
         child: Stack(
           children: [
             Align(
@@ -30,12 +32,11 @@ class LandingScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   ClipPath(
                     clipper: CustomClipperAppBar(),
                     child: Container(
                       width: double.infinity,
-                      height: Helper.getScreenHeight(context) * 0.5,
+                      height: context.getScreenHeight * 0.5,
                       decoration: ShapeDecoration(
                         color: AppColor.orange, // Couleur de fond
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -59,7 +60,7 @@ class LandingScreen extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: double.infinity,
-                height: Helper.getScreenHeight(context) * 0.3,
+                height: context.getScreenHeight * 0.3,
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   children: [
@@ -71,35 +72,14 @@ class LandingScreen extends StatelessWidget {
                       ),
                     ),
                     const Spacer(flex: 1),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
-                        },
-                        style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColor.orange)),
-                        child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 18)),
-                      ),
+                    customButton(
+                      press: () => NavAndAnimationsFunctions.navToWithLTRAnimation(context, LoginScreen()),
+                      title: "Login",
                     ),
                     const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(Colors.white),
-                          foregroundColor: WidgetStateProperty.all(AppColor.orange),
-                          shape: WidgetStateProperty.all(
-                            const StadiumBorder(side: BorderSide(color: AppColor.orange, width: 1.5)),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpScreen()));
-                        },
-                        child: const Text("Create an Account", style: TextStyle(fontSize: 18)),
-                      ),
+                    customOutlinedButton(
+                      press: () => NavAndAnimationsFunctions.navToWithRTLAnimation(context, SignUpScreen()),
+                      title: "Create an account",
                     ),
                     const Spacer(),
                   ],

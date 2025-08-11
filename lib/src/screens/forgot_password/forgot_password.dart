@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/helper/helper.dart';
 import 'package:monkey_meal_project/src/screens/forgot_password/send_otp_screen.dart';
 
 import '../../../core/consts/colors/colors.dart';
 import '../../../core/consts/strings/strings.dart';
-import '../../helper/helper.dart';
 
 class ForgetPwScreen extends StatelessWidget {
   static String routeName = "/forget_pwd";
@@ -15,8 +15,8 @@ class ForgetPwScreen extends StatelessWidget {
     final emailController = TextEditingController();
     return Scaffold(
       body: SizedBox(
-        width: Helper.getScreenWidth(context),
-        height: Helper.getScreenWidth(context),
+        width: context.getScreenWidth,
+        height: context.getScreenWidth,
         child: SafeArea(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),

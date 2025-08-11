@@ -1,77 +1,93 @@
-class OrderModel {
-  final String restaurantName;
-  final double deliveryLocationLatitude;
-  final double deliveryLocationLongitude;
-  final DateTime orderDate;
-  final double totalPrice;
-  final String orderName;
-  final String orderStatus;
-  final String? specialInstructions;
-  final String driverId;
-  final double deliveryFee;
-  final String? promoCodeApplied;
-  final double discountAmount;
-  final String paymentMethodType;
-  final String paymentStatus;
-final String imgUrl;
-  // Constructor for the OfferModel class.
-  OrderModel({
+// order_model.dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-    required this.restaurantName,
-    required this.deliveryLocationLatitude,
-    required this.deliveryLocationLongitude,
-    required this.orderDate,
-    required this.totalPrice,
-    required this.orderStatus,
-    this.specialInstructions,
-    required this.driverId,
-    required this.deliveryFee,
-    required this.imgUrl,
-    required this.orderName,
-    this.promoCodeApplied,
+class OrderModel extends Equatable {
+  final String id;
+  final String itemName;
+  final String itemDescription;
+  final String itemCover;
+  final double itemRating;
+  final int itemPrice;
+  final int quantity;
+  final DateTime orderedAt;
+  final String status;
 
-    required this.discountAmount,
-    required this.paymentMethodType,
-    required this.paymentStatus,
+  const OrderModel({
+    required this.id,
+    required this.itemName,
+    required this.itemDescription,
+    required this.itemCover,
+    required this.itemRating,
+    required this.itemPrice,
+    required this.quantity,
+    required this.orderedAt,
+    required this.status,
   });
 
-  static List<OrderModel> orders = [
-    // First OrderModel object
-    OrderModel(
-      restaurantName: "Burger Palace",
-      orderName:'Burger' ,
-      deliveryLocationLatitude: 34.0522,
-      deliveryLocationLongitude: -118.2437,
-      orderDate: DateTime(2023, 10, 27, 14, 30),
-      totalPrice: 25.50,
-      imgUrl:  'https://images.unsplash.com/photo-1578985545062-69928b1d9587',
-      orderStatus: "Delivered",
-      specialInstructions: null,
-      driverId: "DRIVER-001",
-      deliveryFee: 5.00,
-      promoCodeApplied: "SAVE10",
-      discountAmount: 2.55,
-      paymentMethodType: "Credit Card",
-      paymentStatus: "Paid",
-    ),
+  factory OrderModel.fromFirestore(String id, Map<String, dynamic> data) {
+    return OrderModel(
+      id: id,
+      itemName: data['itemName'] ?? '',
+      itemDescription: data['itemDescription'] ?? '',
+      itemCover: data['itemCover'] ?? '',
+      itemRating: (data['itemRating'] ?? 0.0).toDouble(),
+      itemPrice: data['itemPrice'] ?? 0,
+      quantity: data['quantity'] ?? 1,
+      orderedAt: (data['orderedAt'] as Timestamp).toDate(),
+      status: data['status'] ?? 'pending',
+    );
+  }
 
-    // Second OrderModel object
-    OrderModel(
-      restaurantName: "Pizza Heaven",
-      orderName: 'Burger',
-      deliveryLocationLatitude: 40.7128,
-      deliveryLocationLongitude: -74.0060,
-      orderDate: DateTime(2023, 10, 27, 19, 00),
-      totalPrice: 42.75,
-      imgUrl:  'https://images.unsplash.com/photo-1578985545062-69928b1d9587',
-      orderStatus: "Preparing",
-      specialInstructions: "Extra napkins, please.",
-      driverId: "DRIVER-002",
-      deliveryFee: 3.50,
-      promoCodeApplied: null,
-      discountAmount: 0.00,
-      paymentMethodType: "Debit Card",
-      paymentStatus: "Pending",
-    ),
+  Map<String, dynamic> toJson() {
+    return {
+      'itemName': itemName,
+      'itemDescription': itemDescription,
+      'itemCover': itemCover,
+      'itemRating': itemRating,
+      'itemPrice': itemPrice,
+      'quantity': quantity,
+      'orderedAt': orderedAt,
+      'status': status,
+    };
+  }
+
+  int get totalPrice => itemPrice * quantity;
+
+  @override
+  List<Object?> get props => [
+    id,
+    itemName,
+    itemDescription,
+    itemCover,
+    itemRating,
+    itemPrice,
+    quantity,
+    orderedAt,
+    status,
   ];
+
+  OrderModel copyWith({
+    String? id,
+    String? itemName,
+    String? itemDescription,
+    String? itemCover,
+    double? itemRating,
+    int? itemPrice,
+    int? quantity,
+    DateTime? orderedAt,
+    String? status,
+  }) {
+    return OrderModel(
+      id: id ?? this.id,
+      itemName: itemName ?? this.itemName,
+      itemDescription: itemDescription ?? this.itemDescription,
+      itemCover: itemCover ?? this.itemCover,
+      itemRating: itemRating ?? this.itemRating,
+      itemPrice: itemPrice ?? this.itemPrice,
+      quantity: quantity ?? this.quantity,
+      orderedAt: orderedAt ?? this.orderedAt,
+      status: status ?? this.status,
+    );
+  }
 }
