@@ -19,7 +19,8 @@ class MoreView extends StatelessWidget {
         actions: [IconButton(
           icon: const Icon(Icons.shopping_cart),
           onPressed: () {
-            Helper.navTo(context, PaymentScreen());          },
+Navigator.pushNamed(context, PaymentScreen.routeName);
+               },
         )],),
       body: ListView(
 
@@ -28,42 +29,42 @@ class MoreView extends StatelessWidget {
           MoreItem(
             icon: Icons.monetization_on,
             title: 'Payment Details',
-onTap:(){Helper.navTo(context, PaymentScreen());
+onTap:(){
 
-            /*  Navigator.pushReplacement(context,PaymentScreen.routeName
-              );*/
+              Navigator.pushNamed(context,PaymentScreen.routeName
+              );
               },
           ),
           MoreItem(
             icon: Icons.shopping_bag,
             title: 'My Orders',
             onTap:() {
-              Helper.navTo(context, OrderScreen());
-            }
+              Navigator.pushNamed(context,OrderScreen.routeName
+              );            }
           ),
           MoreItem(
             icon: Icons.notifications,
             title: 'Notifications',
             badge: 15,
             onTap:() {
-              Helper.navTo(context, NotificationScreen());
-              //  Navigator.pushNamed(context,NotificationScreen.routeName);},
-            }
+              //Helper.navTo(context, NotificationScreen());
+                Navigator.pushNamed(context,NotificationScreen.routeName);},
+
           ),
           MoreItem(
             icon: Icons.inbox,
             title: 'Inbox',
             onTap:(){
-             // Navigator.pushNamed(context,InboxScreen.routeName);
-              Helper.navTo(context, InboxScreen());
+              Navigator.pushNamed(context,InboxScreen.routeName);
+            //  Helper.navTo(context, InboxScreen());
             },
           ),
           MoreItem(
             icon: Icons.info,
             title: 'About Us',
               onTap:(){
-                Helper.navTo(context, AboutScreen());
-                //Navigator.pushNamed(context,AboutScreen.routeName);
+             //   Helper.navTo(context, AboutScreen());
+                Navigator.pushNamed(context,AboutScreen.routeName);
     //
     }
           ),

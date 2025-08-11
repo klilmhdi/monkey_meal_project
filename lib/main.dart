@@ -35,10 +35,11 @@ class MyApp extends StatelessWidget {
             (_, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(fontFamily: 'Metropolis'),
-          home: HomeScreen(),
+       //   home: HomeScreen(),
+
+           initialRoute: HomeScreen.routeName,
           // initialRoute: SplashScreen.routeName,
-          // initialRoute: SplashScreen.routeName,
-          // routes: routes,
+           routes: routes,
         ),
       ),
     );

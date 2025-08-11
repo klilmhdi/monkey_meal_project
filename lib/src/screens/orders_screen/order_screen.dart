@@ -22,10 +22,10 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Order'),),
-    /*  bottomNavigationBar:
+      bottomNavigationBar:
       CustomBottomNavBar(onTap:(index){
        // _onItemTapped(index);
-      },currentIndex: 0,),*/
+      },currentIndex: 0,),
       body: ListView(
 
             children: [
@@ -39,7 +39,10 @@ SizedBox(height: 30,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: CustomButton(title: 'Checkout',onPressed: (){
-                  Helper.navTo(context, CheckoutScreen());                },),
+                 // Helper.navTo(context, CheckoutScreen());
+                  Navigator.pushNamed(context,CheckoutScreen.routeName
+                  );
+                  },),
               ),
             ],
           ),
