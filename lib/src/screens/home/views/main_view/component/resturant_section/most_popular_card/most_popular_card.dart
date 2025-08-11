@@ -65,7 +65,7 @@ class MostPopularCardImage extends StatelessWidget {
           Radius.circular(16),
         ),
         image: DecorationImage(
-          image: AssetImage('images/most_popular.jpg'),
+          image: AssetImage('assets/images/most_popular.jpg'),
           fit: BoxFit.cover,
         ),
       ),

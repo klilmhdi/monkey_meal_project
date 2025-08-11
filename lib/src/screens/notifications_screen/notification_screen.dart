@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 import 'package:monkey_meal_project/src/screens/payment/payment_screen.dart';
 class NotificationScreen extends StatefulWidget {
   static String routeName='/notificationRoute';
@@ -23,6 +24,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
           },
         ),
       ],),
+      bottomNavigationBar:
+      CustomBottomNavBar(onTap:(index){
+       // _onItemTapped(index);
+      },currentIndex: 0,),
       body: ListView.builder(
         itemCount: 8, // Replace with your actual data length
         itemBuilder: (context, index) {

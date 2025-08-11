@@ -21,7 +21,7 @@ class ItemListTile extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             image: DecorationImage(
-              image: AssetImage('images/burger_image.png'),
+              image: AssetImage('assets/images/burger_image.png'),
               fit: BoxFit.cover,
             ),
           ),

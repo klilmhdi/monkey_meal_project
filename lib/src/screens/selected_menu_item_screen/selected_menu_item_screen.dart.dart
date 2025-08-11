@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_search_app_bar.dart';
 import 'package:monkey_meal_project/core/shared_widgets/item_widgets/item_data.dart';
 import 'package:monkey_meal_project/core/shared_widgets/item_widgets/item_image.dart';
@@ -48,32 +49,33 @@ class MenueItemsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: ListView.builder(
-          itemCount: 10, // Example item count
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2.0),
-              child: ItemImage(
-                imagePath: 'assets/images/dessert.jpg',
-                child: MenueItemData(),
-                onTap: () {
-                  Helper.navTo(context, TandooriChickenPizzaPage());
-                },
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
               ),
-            );
-          },
-        ),
-      ),
+            ],
+          ),
+          child: ListView.builder(
+            itemCount: 10, // Example item count
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0),
+                child: ItemImage(
+                  imagePath: 'assets/images/dessert.jpg',
+                  child: MenueItemData(),
+                  onTap: () {
+                    Helper.navTo(context, TandooriChickenPizzaPage());
+                  },
+                ),
+              );
+            },
+          ),
+        )
+
     );
   }
 }

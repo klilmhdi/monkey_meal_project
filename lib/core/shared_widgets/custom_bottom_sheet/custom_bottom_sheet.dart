@@ -39,12 +39,12 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
               Text('Expiry',style: TextStyle(fontFamily: 'Metropolis',fontWeight: FontWeight.w700),),
               SizedBox(width: 16,),
               Expanded(child: CustomTextFormField(hint: 'MM',
-                maxLength: 2,
+                //maxLength: 2,
                 keyboardType: TextInputType.number,))
 
              , const SizedBox(width: 10),
               Expanded(child: CustomTextFormField(hint: 'YY',
-                maxLength: 2,
+                //maxLength: 2,
 
                 keyboardType: TextInputType.number,))
             ],

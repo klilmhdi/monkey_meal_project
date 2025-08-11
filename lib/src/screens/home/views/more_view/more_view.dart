@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:monkey_meal_project/src/helper/helper.dart';
 import 'package:monkey_meal_project/src/screens/about_screen/about_screen.dart';
 import 'package:monkey_meal_project/src/screens/inbox_screen/inbox_screen.dart';
 import 'package:monkey_meal_project/src/screens/notifications_screen/notification_screen.dart';
@@ -18,8 +19,7 @@ class MoreView extends StatelessWidget {
         actions: [IconButton(
           icon: const Icon(Icons.shopping_cart),
           onPressed: () {
-            Navigator.pushNamed(context, PaymentScreen.routeName);
-          },
+            Helper.navTo(context, PaymentScreen());          },
         )],),
       body: ListView(
 
@@ -28,35 +28,44 @@ class MoreView extends StatelessWidget {
           MoreItem(
             icon: Icons.monetization_on,
             title: 'Payment Details',
-onTap:(){
-              Navigator.pushNamed(context,PaymentScreen.routeName);},
+onTap:(){Helper.navTo(context, PaymentScreen());
+
+            /*  Navigator.pushReplacement(context,PaymentScreen.routeName
+              );*/
+              },
           ),
           MoreItem(
             icon: Icons.shopping_bag,
             title: 'My Orders',
-            onTap:(){
-              Navigator.pushNamed(context,OrderScreen.routeName);},
-
+            onTap:() {
+              Helper.navTo(context, OrderScreen());
+            }
           ),
           MoreItem(
             icon: Icons.notifications,
             title: 'Notifications',
             badge: 15,
-            onTap:(){
-              Navigator.pushNamed(context,NotificationScreen.routeName);},
-
+            onTap:() {
+              Helper.navTo(context, NotificationScreen());
+              //  Navigator.pushNamed(context,NotificationScreen.routeName);},
+            }
           ),
           MoreItem(
             icon: Icons.inbox,
             title: 'Inbox',
             onTap:(){
-              Navigator.pushNamed(context,InboxScreen.routeName);},
+             // Navigator.pushNamed(context,InboxScreen.routeName);
+              Helper.navTo(context, InboxScreen());
+            },
           ),
           MoreItem(
             icon: Icons.info,
             title: 'About Us',
               onTap:(){
-                Navigator.pushNamed(context,AboutScreen.routeName);}
+                Helper.navTo(context, AboutScreen());
+                //Navigator.pushNamed(context,AboutScreen.routeName);
+    //
+    }
           ),
         ],
       ),

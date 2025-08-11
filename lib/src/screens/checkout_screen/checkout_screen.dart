@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_button.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 import 'package:monkey_meal_project/core/shared_widgets/summary_row_widget.dart';
+import 'package:monkey_meal_project/src/helper/helper.dart';
 import 'package:monkey_meal_project/src/screens/change_address_screen/change_address_screen.dart';
 import 'package:monkey_meal_project/src/screens/checkout_screen/component/payment_method_item.dart';
 class CheckoutScreen extends StatelessWidget {
@@ -28,6 +30,10 @@ class CheckoutScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
+      bottomNavigationBar:
+      CustomBottomNavBar(onTap:(index){
+       // _onItemTapped(index);
+      },currentIndex: 0,),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -106,7 +112,8 @@ CustomButton(title: 'Send order',onPressed: (){
     ),
     builder: (_) =>  CustomBottomSheet(
       onPressed:() {
-        Navigator.popAndPushNamed(context, ChangeAddressScreen.routeName);
+        Helper.navTo(context, ChangeAddressScreen());
+        //Navigator.popAndPushNamed(context, ChangeAddressScreen.routeName);
 
         },
     ),

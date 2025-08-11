@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 import 'package:monkey_meal_project/src/screens/home/component/custom_navigation_item.dart';
 import 'package:monkey_meal_project/src/screens/home/views/main_view/main_view.dart';
 import 'package:monkey_meal_project/src/screens/home/views/menu_view.dart';
@@ -31,16 +32,22 @@ class _HomeScreenState extends State<HomeScreen>{
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+
       bottom: false,
       child:   Scaffold(
-        floatingActionButton: FloatingActionButton(
+    /*    floatingActionButton: FloatingActionButton(
           onPressed: () => _onItemTapped(2),
           // Home button, always navigates to index 2
           backgroundColor: Colors.white,
           child: const Icon(Icons.home, color: Colors.black54),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomAppBar(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
+        bottomNavigationBar:
+        CustomBottomNavBar(onTap:(index){
+          _onItemTapped(index);
+        },currentIndex: 0,),
+
+        /* BottomAppBar(
           shape: const CircularNotchedRectangle(),
           // Creates the curved notch for the FAB
           notchMargin: 8.0,
@@ -67,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen>{
                   label: 'More', index: 4),
             ],
           ),
-        ),
+        ),*/
         body: screen_options[_selectedIndex]
         ,),
     );

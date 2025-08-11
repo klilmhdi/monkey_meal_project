@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 import 'package:monkey_meal_project/src/helper/helper.dart';
 import 'package:monkey_meal_project/src/screens/food_details/component/background_image_container.dart';
 import 'package:monkey_meal_project/src/screens/food_details/component/custom_app_bar.dart';
@@ -23,6 +24,10 @@ class _TandooriChickenPizzaPageState extends State<TandooriChickenPizzaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+     /* bottomNavigationBar:
+      CustomBottomNavBar(onTap:(index){
+       // _onItemTapped(index);
+      },currentIndex: 0,),*/
       body: Column(
         children: [
           SizedBox(

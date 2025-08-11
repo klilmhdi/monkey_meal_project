@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 import 'package:monkey_meal_project/src/screens/payment/payment_screen.dart';
 class InboxScreen extends StatelessWidget {
   static String routeName='/inboxRoute';
@@ -24,6 +25,10 @@ class InboxScreen extends StatelessWidget {
               Navigator.pushNamed(context, PaymentScreen.routeName);
             },
           )],),
+        bottomNavigationBar:
+        CustomBottomNavBar(onTap:(index){
+        //  _onItemTapped(index);
+        },currentIndex: 0,),
       body:  ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     itemBuilder: (context, index) {

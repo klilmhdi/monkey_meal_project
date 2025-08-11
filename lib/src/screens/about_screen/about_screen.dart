@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 class AboutScreen extends StatelessWidget {
   static String routeName = '/aboutRoute';
 
@@ -7,6 +8,12 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    /*  bottomNavigationBar:
+      CustomBottomNavBar(
+
+        onTap:(index){
+      //  _onItemTapped(index);
+      },currentIndex: 0,),*/
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

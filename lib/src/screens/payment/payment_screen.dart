@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_button.dart';
+import 'package:monkey_meal_project/core/shared_widgets/custom_nav_bar/bottom_nav_curve_painter.dart';
 import 'package:monkey_meal_project/src/screens/payment/component/payment_card_widget.dart';
 class PaymentScreen extends StatefulWidget {
   static String routeName='/paymentRoute';
@@ -20,6 +21,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
         icon: const Icon(Icons.shopping_cart),
         onPressed: () {},
       )],),
+      bottomNavigationBar:
+      CustomBottomNavBar(onTap:(index){
+      //  _onItemTapped(index);
+      },currentIndex: 0,),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

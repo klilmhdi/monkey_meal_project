@@ -20,7 +20,7 @@ class ChangeAddressScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Checkout',
+          'Change Address',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
