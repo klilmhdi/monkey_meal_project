@@ -4,6 +4,7 @@ import 'package:monkey_meal_project/core/consts/colors/colors.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:monkey_meal_project/core/shared_widgets/custom_search_app_bar.dart';
 import 'package:monkey_meal_project/src/helper/helper.dart';
+import 'package:monkey_meal_project/src/screens/selected_menu_item_screen/selected_menu_item_screen.dart.dart';
 
 
 class MenuView extends StatelessWidget {
@@ -24,7 +25,7 @@ class MenuView extends StatelessWidget {
           CustomSearchBar(),
            SizedBox(height: 14.h,),
 
-       
+
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -36,7 +37,7 @@ class MenuView extends StatelessWidget {
                   children: [
                     LongSideBar(),
                     ..._buildMenuItems(30.h,  true, () {
-                     // Helper.navTo(context, SelectedMenuItemScreen());
+                      Helper.navTo(context, SelectedMenuItemScreen());
                     }),
                     ..._buildMenuItems(140.h,  false, () {}),
                     ..._buildMenuItems(250.h, false, () {}),

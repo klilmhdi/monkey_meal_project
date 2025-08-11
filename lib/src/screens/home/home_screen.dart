@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monkey_meal_project/src/screens/home/component/custom_navigation_item.dart';
 import 'package:monkey_meal_project/src/screens/home/views/main_view/main_view.dart';
-import 'package:monkey_meal_project/src/screens/home/views/menu_view/menu_view.dart';
+import 'package:monkey_meal_project/src/screens/home/views/menu_view.dart';
 import 'package:monkey_meal_project/src/screens/home/views/more_view/more_view.dart';
 import 'package:monkey_meal_project/src/screens/home/views/offer_view/offer_view.dart';
 import 'package:monkey_meal_project/src/screens/home/views/profile_view/profile_view.dart';

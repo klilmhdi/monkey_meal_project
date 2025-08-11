@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             (_, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(fontFamily: 'Metropolis'),
-          home: SplashScreen(),
+          home: HomeScreen(),
           // initialRoute: SplashScreen.routeName,
           // initialRoute: SplashScreen.routeName,
           // routes: routes,

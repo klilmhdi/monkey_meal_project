@@ -12,6 +12,7 @@ import 'package:monkey_meal_project/src/screens/intro_screen/first_intro_screen.
 import 'package:monkey_meal_project/src/screens/notifications_screen/notification_screen.dart';
 import 'package:monkey_meal_project/src/screens/orders_screen/order_screen.dart';
 import 'package:monkey_meal_project/src/screens/payment/payment_screen.dart';
+import 'package:monkey_meal_project/src/screens/selected_menu_item_screen/selected_menu_item_screen.dart.dart';
 import 'package:monkey_meal_project/src/screens/sign_in/log_in_screen.dart';
 import 'package:monkey_meal_project/src/screens/sign_up/sign_up_screen.dart';
 import 'package:monkey_meal_project/src/screens/splash/landing_screen.dart';
@@ -36,5 +37,6 @@ final Map<String, WidgetBuilder> routes = {
 CheckoutScreen.routeName:(context)=>CheckoutScreen(),
 ChangeAddressScreen.routeName:(context)=>ChangeAddressScreen(),
   AboutScreen.routeName:(context)=>AboutScreen(),
-  TandooriChickenPizzaPage.routeName:(context)=>TandooriChickenPizzaPage()
+  TandooriChickenPizzaPage.routeName:(context)=>TandooriChickenPizzaPage(),
+  SelectedMenuItemScreen.routeName:(context)=>SelectedMenuItemScreen()
 };
